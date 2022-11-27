@@ -2,12 +2,13 @@
   "name": "frontend",
   "version": "0.0.0",
   "scripts": {
+    "Pour memoire pour utiliser les scripts => npm run start, npm run json, etc": "",
     "ng": "ng",
     "start": "ng serve",
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
-    "json-server": ".\\node_modules\\.bin\\json-server --watch .\\_datas\\db.json"
+    "json": ".\\node_modules\\.bin\\json-server --watch .\\_datas\\db.json"
   },
   "private": true,
   "dependencies": {

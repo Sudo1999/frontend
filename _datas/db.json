@@ -6,7 +6,7 @@
       "firstName": "Jean-Luc",
       "email": "jla.webprojet@gmail.com",
       "phoneNumber": "06 66 77 88 99",
-      "birthDate": "1955-06-16T00:00:00.000Z"
+      "birthDate": "1968-03-30T00:00:00.000Z"
     },
     {
       "id": 2,
@@ -14,47 +14,7 @@
       "firstName": "James",
       "email": "james.bond@mi6.co.uk",
       "phoneNumber": "07 00 70 07 00",
-      "birthDate": "1945-06-16T00:00:00.000Z"
-    },
-    {
-      "id": 3,
-      "lastName": "a",
-      "firstName": "b",
-      "email": "c@d",
-      "phoneNumber": "",
-      "birthDate": null
-    },
-    {
-      "id": 4,
-      "lastName": "a",
-      "firstName": "b",
-      "email": "c@d",
-      "phoneNumber": "",
-      "birthDate": null
-    },
-    {
-      "id": 5,
-      "lastName": "aaa",
-      "firstName": "bbb",
-      "email": "ccc@d",
-      "phoneNumber": "",
-      "birthDate": null
-    },
-    {
-      "id": 6,
-      "lastName": "a",
-      "firstName": "b",
-      "email": "c@d",
-      "phoneNumber": "",
-      "birthDate": null
-    },
-    {
-      "id": 7,
-      "lastName": "x",
-      "firstName": "x",
-      "email": "x@x",
-      "phoneNumber": "",
-      "birthDate": "2022-10-31T00:00:00.000Z"
+      "birthDate": "1945-06-18T00:00:00.000Z"
     }
   ]
 }

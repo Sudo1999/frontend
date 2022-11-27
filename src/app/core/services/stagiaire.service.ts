@@ -19,9 +19,10 @@ export class StagiaireService {
   ) {
     //this.feedIt();  // On coupe pour aller chercher les données dans le back
     this.controllerBaseUrl = `${environment.apiBaseUrl}/stagiaires`;
+    // A ce stade => http://localhost:3000/stagiaires pour aller chercher le serveur json
   }
 
-  private feedIt(): void {
+  private feedIt(): void {  // La fonction n'est utilisée que pour afficher les trois lignes du haut (invisibles plus tard)
     let stagiaire = new Stagiaire();
     stagiaire.setId(1);
     stagiaire.setLastName("Zidane");
@@ -85,7 +86,7 @@ export class StagiaireService {
     return this.HttpClient.get<any>(
       //'localhost:3000/stagiaires'
       //'http://localhost:8080/api/stagiaire'
-      this.controllerBaseUrl
+      this.controllerBaseUrl    // => `${environment.apiBaseUrl}/stagiaires`;
     )
     .pipe(
       take(1),
