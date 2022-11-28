@@ -2,6 +2,7 @@ import { HttpBackend, HttpClient, HttpErrorResponse } from '@angular/common/http
 import { Injectable } from '@angular/core';
 import { Observable, throwError } from 'rxjs';
 import { catchError, map, take } from 'rxjs/operators';
+import { StagiaireDto } from 'src/app/stagiaires/dto/stagiaire-dto';
 import { environment } from 'src/environments/environment';
 import { Stagiaire } from '../models/stagiaire';
 
@@ -18,8 +19,8 @@ export class StagiaireService {
     private HttpClient: HttpClient
   ) {
     //this.feedIt();  // On coupe pour aller chercher les données dans le back
-    this.controllerBaseUrl = `${environment.apiBaseUrl}/stagiaires`;
-    // A ce stade => http://localhost:3000/stagiaires pour aller chercher le serveur json
+    this.controllerBaseUrl = `${environment.apiBaseUrl}/stagiaire`;
+    // A ce stade => http://localhost:3000/stagiaires pour aller chercher le serveur json  
   }
 
   private feedIt(): void {  // La fonction n'est utilisée que pour afficher les trois lignes du haut (invisibles plus tard)
@@ -117,13 +118,13 @@ export class StagiaireService {
     )
   }*/
 
-  public add(stagiaire: Stagiaire): void {
+  public add(stagiaire: StagiaireDto): void {
     // hack to provoque error
-    stagiaire.setFirstName('');
-    //end hack
-    
+    //stagiaire.setFirstName('');
+    //end hack    
     console.log("Le add a appelé ", stagiaire);
-    this.HttpClient.post(this.controllerBaseUrl, stagiaire)   // On a un pb avec le stagiaire en camel case ou pas
+    //this.HttpClient.post(this.controllerBaseUrl, stagiaire)   // On a un pb avec le stagiaire en camel case ou pas
+    this.HttpClient.post<StagiaireDto>(this.controllerBaseUrl, stagiaire)
       .pipe(
         //take(1),
         // take + map : res Json => Stagiaire
