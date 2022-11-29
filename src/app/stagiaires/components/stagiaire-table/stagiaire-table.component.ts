@@ -1,5 +1,7 @@
+import { HttpResponse } from '@angular/common/http';
 import { convertFromMaybeForwardRefExpression } from '@angular/compiler/src/render3/util';
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { BehaviorSubject } from 'rxjs';
 import { Stagiaire } from 'src/app/core/models/stagiaire';
 import { StagiaireService } from 'src/app/core/services/stagiaire.service';
@@ -20,7 +22,8 @@ export class StagiaireTableComponent implements OnInit {
   //constructor() { }
   constructor(
     private stagiaireService: StagiaireService,       // Injection de dépendance
-    private handleDetailService: HandleDetailService
+    private handleDetailService: HandleDetailService,
+    private router: Router
   ) {}
 
   // Exécution du constructeur, puis ensuite de Init :
@@ -33,7 +36,15 @@ export class StagiaireTableComponent implements OnInit {
 
   public onRemove(stagiaire: Stagiaire): void {
     console.log(`L'utilisateur souhaite supprimer ${stagiaire.getLastName()}`);
-    this.stagiaireService.delete(stagiaire);
+    this.stagiaireService.delete(stagiaire)
+    // Post-routage :
+    .subscribe({
+      next: (response: HttpResponse<any>) => {
+        this.stagiaires.splice(
+          this.stagiaires.findIndex((s: Stagiaire) => s.getId() === stagiaire.getId()), 1)
+          // Snackbar
+      }
+    });
 
     //this.stagiaires.splice(stagiaire.getId(), 1);   // On ne fait pas ça comme ça
     // pour ne pas mettre la logique ici, et pour la reproductibilité
@@ -87,15 +98,18 @@ export class StagiaireTableComponent implements OnInit {
 
   // Exercice du detail-component :
 
-  public onClick(stagiaire: Stagiaire): void {
-    // Pour commencer je vais afficher un element, puis si ça marche, un composant
-    //console.log(JSON.stringify(stagiaire));
-    //this.isDetailHidden = false;
-    this.handleDetailService.setIsDetailHidden(false);
-    this.selectedStagiaire = stagiaire;
-
+  // public onClick(stagiaire: Stagiaire): void {
+  //   // Pour commencer je vais afficher un element, puis si ça marche, un composant
+  //   //console.log(JSON.stringify(stagiaire));
+  //   //this.isDetailHidden = false;
+  //   this.handleDetailService.setIsDetailHidden(false);
+  //   this.selectedStagiaire = stagiaire;   
     // Exercice du handle-detail.service :
-    this.handleDetailService.setIsDetailHidden(false);    // On le met pour tester le console.log du ngOnInit
+  //   this.handleDetailService.setIsDetailHidden(false);    // On le met pour tester le console.log du ngOnInit
+  // }
+
+  public onClick(stagiaire: Stagiaire): void {
+    this.router.navigate(['/', 'stagiaire', stagiaire.getId()]);
   }
 
   // public onDetailClose(event: boolean): void {     // On l'efface quand on bascule sur isDetailHidden$

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AbstractControl, FormControl, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { Stagiaire } from 'src/app/core/models/stagiaire';
 import { StagiaireService } from 'src/app/core/services/stagiaire.service';
 import { StagiaireDto } from '../../dto/stagiaire-dto';
@@ -38,7 +39,8 @@ export class StagiaireFormComponent implements OnInit {
 
   constructor( 
     private stagiaireService: StagiaireService,  // Injection de dépendance
-    private formBuilderService: FormBuilderService
+    private formBuilderService: FormBuilderService,
+    private router: Router
   ) { }
 
   ngOnInit(): void {
@@ -75,12 +77,13 @@ public get c(): {[key: string]: AbstractControl} {
 
     console.log("Delegate add stagiaire:", this.stagiaireForm.value);
     const dto: StagiaireDto = new StagiaireDto(this.stagiaireForm.value);
-    this.stagiaireService.add(dto);
+    this.stagiaireService.add(dto)
+    .subscribe(() => {
+      this.goHome();
+    });
   }
 
-  // Exercice du Datepicker :
-  
-  getDateFormatString() {
-
+  public goHome(): void {
+    this.router.navigate(['/', 'home']);
   }
 }

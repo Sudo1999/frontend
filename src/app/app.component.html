@@ -6,17 +6,19 @@
 </h1>
 
 <!-- Ici on a une première liste de stagiaires, immédiatement sous le titre -->
-<ul>
-  <!--
+<!--<ul>  
       <li *ngFor="let stagiaire of stagiaires">
         {{ stagiaire }}     // Interpolation
-      </li> -->
-
+      </li>
   <li *ngFor="let stagiaire of stagiaires">
-    <!-- Le tableau stagiaires est celui de app.component.ts -->
+    Le tableau stagiaires est celui de app.component.ts
     {{ stagiaire.getLastName() }}
   </li>
-</ul>
+</ul> -->
+
+<!-- Routeur : on efface tout le reste et on ajoute seulement la ligne ci-dessous :
+  au début stagiaire-table-component envoie ici du fait de la wild card -->
+<router-outlet></router-outlet>
 
 <!-- Le bouton appelle la fonction (désactivée) addStagiaire() de app.component.ts -->
 <!-- <button type="button" (click)="addStagiaire()">
@@ -24,19 +26,18 @@
 </button>
 <p></p> -->
 
-<app-stagiaire-form></app-stagiaire-form>
+<!-- <app-stagiaire-form></app-stagiaire-form> -->
 
 <!-- Ici on a un second tableau, qui va provenir de stagiaire-table.component.html -->
-<app-stagiaire-table></app-stagiaire-table>
-<p></p>
+<!-- <app-stagiaire-table></app-stagiaire-table> -->
 
-<!-- Exercice du mot de passe -->
+<!-- Exercice du mot de passe :
 <input type="text" placeholder="Your password...">
 &nbsp;
-<!-- <input [type]="'password'" placeholder="Wesh..."> => Directive d'attribut [type] pour le modifier dynamiquement -->
+<input [type]="'password'" placeholder="Wesh..."> => Directive d'attribut [type] pour le modifier dynamiquement
 <input [type]="inputType" placeholder="Wesh...">
 &nbsp;
 <button type="button" (click)="showPassword()" [disabled]="this.inputType === 'Text'"> Voir en clair </button>
-<!-- [disabled] est un attribut Html, qui va être piloté par Angular grâce aux crochets [] -->
+[disabled] est un attribut Html, qui va être piloté par Angular grâce aux crochets []
 <p></p>
-<p>Le langage <abbr [title]="titreHtml">HTML</abbr> est interprété par Angular.</p>
+<p>Le langage <abbr [title]="titreHtml">HTML</abbr> est interprété par Angular.</p> -->

@@ -62,10 +62,16 @@
     </tfoot>
 </table>
 
+<!-- Ajout pour le routeur
+<a href="/stagiaire/add">Ajouter</a>
+=> Le routerLink permet de ne pas recharger mais de passer par un routage interne -->
+<a [routerLink]="['/', 'stagiaire', 'add']">Ajouter</a>
+
 <!-- La balise <app-stagiaire-detail> va chercher son contenu dans le fichier stagiaire-detail.component.html -->
 <!-- Le [stagiaire]="selectedStagiaire!" exporte l'information vers son @Input -->
 <!-- Le (onCloseEvent)="onDetailClose($event)" importe l'information provenant de son @Output -->
 <!-- <app-stagiaire-detail [stagiaire]="selectedStagiaire!" (onCloseEvent)="onDetailClose($event)" 
     [hidden]="isDetailHidden"> est changé lors de l'exercice handle-detail.service
     pour introduire le pipe async, qui va remplacer le subscribe dans le ngOnInit du .ts : -->
-<app-stagiaire-detail [stagiaire]="selectedStagiaire!" [hidden]="isDetailHidden$ | async"></app-stagiaire-detail>
+    
+<!--<app-stagiaire-detail [stagiaire]="selectedStagiaire!" [hidden]="isDetailHidden$ | async"></app-stagiaire-detail>-->

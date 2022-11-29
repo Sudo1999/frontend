@@ -1,4 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { ActivatedRoute, Params, Router } from '@angular/router';
 import { Stagiaire } from 'src/app/core/models/stagiaire';
 import { StagiaireService } from 'src/app/core/services/stagiaire.service';
 import { HandleDetailService } from 'src/app/shared/directives/handle-detail.service';
@@ -16,10 +17,24 @@ export class StagiaireDetailComponent implements OnInit {
   @Input() stagiaire!: Stagiaire | null;   // L'input provient du parent (! permet de ne pas l'initialiser tout de suite)
   @Output() public onCloseEvent: EventEmitter<boolean> = new EventEmitter<boolean>(); // L'output est envoyé au parent
   constructor(
-    private handleDetailService: HandleDetailService    // On injecte handleDetailService
+    private handleDetailService: HandleDetailService,    // On injecte handleDetailService
+    private route: ActivatedRoute,
+    private stagiaireService: StagiaireService,
+    private router: Router
   ) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.route.params     // C'est un observable => il faut souscrire
+    .subscribe((routeParams: Params) => {    //any) => {
+      console.log('Route params ', JSON.stringify(routeParams))
+      const stagiaireId: number = routeParams['id'];    //routeParams.id;
+      console.log('Id was : ', stagiaireId);
+      this.stagiaireService.findOne(stagiaireId)
+      .subscribe((stagiaire: Stagiaire) => {
+        this.stagiaire = stagiaire;
+      })
+    })
+  }
   
   public onClose(): void {
     //this.onCloseEvent.emit(true);   // A cet émetteur va être associé un récepteur onCloseEvent
@@ -27,7 +42,9 @@ export class StagiaireDetailComponent implements OnInit {
     // qui va recevoir l'information par l'intermédiaire du @Output onCloseEvent
 
     // La fonction est remplacée lors de l'exercice du handle-detail.service :
-    this.handleDetailService.setIsDetailHidden(true);
+    //this.handleDetailService.setIsDetailHidden(true);
+
+    this.router.navigate(['/', 'home']);
   }
 
   public ouvrePopUp() {

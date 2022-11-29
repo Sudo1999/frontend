@@ -1,4 +1,4 @@
-import { HttpBackend, HttpClient, HttpErrorResponse } from '@angular/common/http';
+import { HttpBackend, HttpClient, HttpErrorResponse, HttpResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, throwError } from 'rxjs';
 import { catchError, map, take } from 'rxjs/operators';
@@ -16,7 +16,7 @@ export class StagiaireService {
   private controllerBaseUrl!: string;
 
   constructor(
-    private HttpClient: HttpClient
+    private httpClient: HttpClient  // Le service httpClient contient les méthodes CRUD
   ) {
     //this.feedIt();  // On coupe pour aller chercher les données dans le back
     this.controllerBaseUrl = `${environment.apiBaseUrl}/stagiaire`;
@@ -65,26 +65,36 @@ export class StagiaireService {
       this.stagiaires.filter((obj: Stagiaire) => obj.getBirthDate() < date).length;
   }
 
-  public delete(stagiaire: Stagiaire): void {
-    console.log(`Le composant me demande de supprimer ${stagiaire.getLastName()}`);
+  public delete(stagiaire: Stagiaire): Observable<HttpResponse<any> > {   // Modifié pour corriger le bug
+    console.log(`Le composant me demande de supprimer ${stagiaire.getFirstName()} ${stagiaire.getLastName()}
+     id ${stagiaire.getId()}`);
     // Mise en relation avec le back :
     //1. Call backend
-    this.HttpClient.delete(
+    return this.httpClient.delete(
       //`http://localhost:8080/api/stagiaire/${stagiaire.getId()}`
-      `${this.controllerBaseUrl}/${stagiaire.getId()}`
-      ).subscribe((res: any) =>
-    console.log("ok")
-    )
-    //2. Adapt local list
-    const stagiaireIndex: number = this.stagiaires.findIndex(
-      (obj: Stagiaire) => obj.getId()
+      `${this.controllerBaseUrl}/${stagiaire.getId()}`,      
+      // Suite post-routage :
+      {
+        observe: 'response'   // Après le delete on n'a pas obligatoirement de réponse => on veut son contenu
+      }
+    //   ).subscribe((res: any) =>
+    // console.log("ok")
+    // )
+    // //2. Adapt local list
+    // const stagiaireIndex: number = this.stagiaires.findIndex(
+    //   (obj: Stagiaire) => obj.getId()
     );
   }
+  // public deleteOne(id: number): Observable<Stagiaire> {
+  //   return this.httpClient.get<any>(
+  //     `${environment.apiBaseUrl}/stagiaire/${id}`
+  //   )
+  // }
 
   // Etape du json :
   
   public findAll(): Observable<Stagiaire[]> {
-    return this.HttpClient.get<any>(
+    return this.httpClient.get<any>(
       //'localhost:3000/stagiaires'
       //'http://localhost:8080/api/stagiaire'
       this.controllerBaseUrl    // => `${environment.apiBaseUrl}/stagiaires`;
@@ -106,6 +116,27 @@ export class StagiaireService {
     )
   }
 
+  // Etape post-routage
+
+  public findOne(id: number): Observable<Stagiaire> {
+    return this.httpClient.get<any>(
+      `${environment.apiBaseUrl}/stagiaire/${id}`
+    )
+    .pipe(
+      take(1),
+      map((inputStagiaire: any) => {
+        const stagiaire: Stagiaire = new Stagiaire();
+        stagiaire.setId(inputStagiaire.id);
+        stagiaire.setLastName(inputStagiaire.lastName);
+        stagiaire.setFirstName(inputStagiaire.firstName);
+        stagiaire.setEmail(inputStagiaire.email);
+        stagiaire.setPhoneNumber(inputStagiaire.phoneNumber);
+        stagiaire.setBirthDate(new Date(inputStagiaire.birthDate));
+        return stagiaire;
+      })
+    )
+  }
+
   // Suite du travail avec le back :
 
   /*
@@ -118,23 +149,35 @@ export class StagiaireService {
     )
   }*/
 
-  public add(stagiaire: StagiaireDto): void {
+  //public add(stagiaire: StagiaireDto): void {
+    public add(stagiaire: StagiaireDto): Observable<Stagiaire> {
     // hack to provoque error
     //stagiaire.setFirstName('');
     //end hack    
     console.log("Le add a appelé ", stagiaire);
     //this.HttpClient.post(this.controllerBaseUrl, stagiaire)   // On a un pb avec le stagiaire en camel case ou pas
-    this.HttpClient.post<StagiaireDto>(this.controllerBaseUrl, stagiaire)
+    return this.httpClient.post<StagiaireDto>(this.controllerBaseUrl, stagiaire)
       .pipe(
+        take(1),
+        map((stagiaireDto: StagiaireDto) => {
+          const stagiaire: Stagiaire = new Stagiaire();
+            stagiaire.setId(stagiaireDto.id!);
+            stagiaire.setLastName(stagiaireDto.lastName);
+            stagiaire.setFirstName(stagiaireDto.firstName);
+            stagiaire.setEmail(stagiaireDto.email);
+            stagiaire.setPhoneNumber(stagiaireDto.phoneNumber);
+            stagiaire.setBirthDate(new Date(stagiaireDto.birthDate))
+            return stagiaire;
+        })
+      );
         //take(1),
         // take + map : res Json => Stagiaire
-        catchError((error: HttpErrorResponse) => {
+        /*catchError((error: HttpErrorResponse) => {
           console.log("Stagiaire not created : ", error);
           return throwError(() => new Error("Not created"));
         }
       ))
-      .subscribe(res => console.log("Réponse : ", res));
-
+      .subscribe(res => console.log("Réponse : ", res));*/
       // .subscribe(
       //   //_ => console.log("Sent")
       //   response => console.log("Réponse : ", response)
