@@ -29,7 +29,6 @@ export class StagiaireFilterComponent implements OnInit {
         this.changeButtonState('btnLT1950');
       }
     }
-    //console.log(this.filterDate);
   }
 
   public getButtonState(key: string): boolean {

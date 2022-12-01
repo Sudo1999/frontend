@@ -29,7 +29,7 @@ import { SharedModule } from './shared/shared.module';
     AppRoutingModule,
     //ReactiveFormsModule,
     BrowserAnimationsModule,
-    SharedModule              // Modifications au stade de l'ajout du material-ui
+    SharedModule
   ],
   providers: [],
   bootstrap: [AppComponent]   // AppModule appelle AppComponent (app.component.ts)

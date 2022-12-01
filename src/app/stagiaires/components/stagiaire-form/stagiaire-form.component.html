@@ -1,13 +1,9 @@
 <!--<p>stagiaire-form works!</p>-->
 
 <form [formGroup]="stagiaireForm" (ngSubmit)="onSubmit()">
-    <!--<label for="lastName">Lastname:</label>
-    <input id="lastName" type="text" [formControl]="lastName">-->
 
     <div>
-        <mat-form-field>    <!-- Ajout au stade du material-ui -->
-            <!--<label for="lastName">Lastname</label>
-            <input id="lastName" type="text" formControlName="lastName">-->
+        <mat-form-field>
             <input matInput placeholder="Nom du stagiaire..." id="lastName" type="text" formControlName="lastName">
             <mat-error *ngIf="c['lastName'].errors && c['lastName'].touched">
                 Le nom du stagiaire est obligatoire !
@@ -17,8 +13,6 @@
 
     <div>
         <mat-form-field>
-            <!--<label for="firstName">Firstname</label>
-            <input id="firstName" type="text" formControlName="firstName">-->
             <input matInput placeholder="Prénom du stagiaire..." id="firstName" type="text" formControlName="firstName">
             <mat-error *ngIf="c['firstName'].errors && c['firstName'].touched">
                 Le prénom du stagiaire est obligatoire !
@@ -28,8 +22,6 @@
 
     <div>
         <mat-form-field>
-            <!--<label for="email">Email</label>
-            <input id="email" type="email" formControlName="email">-->
             <input matInput placeholder="Email du stagiaire..." id="email" type="email" formControlName="email">
             <mat-error *ngIf="c['email'].errors && c['email'].touched">
                 <span *ngIf="c['email'].hasError('required')">
@@ -44,8 +36,6 @@
 
     <div>
         <mat-form-field>
-            <!--<label for="phoneNumber">Phone number</label>
-            <input id="phoneNumber" type="text" formControlName="phoneNumber">-->
             <input matInput placeholder="Numéro de téléphone..." id="phoneNumber" type="text" formControlName="phoneNumber">
             <mat-error *ngIf="c['phoneNumber'].errors && c['phoneNumber'].touched">
                 <span *ngIf="c['phoneNumber'].hasError('required')">
@@ -60,11 +50,6 @@
 
     <p></p>
     <div>
-        <!--<label for="birthDate">Birthdate</label>
-        <input id="birthDate" type="date" formControlName="birthDate">-->
-        <!-- <mat-form-field>
-            <input matInput placeholder="Date de naissance..." id="birthDate" type="date" formControlName="birthDate">
-        </mat-form-field> -->
         <!-- Exercice du Datepicker (Ajouter 'CUSTOM_ELEMENTS_SCHEMA' au '@NgModule.schemas' ?) : -->
         <mat-form-field appearance="fill">
             <mat-label>Birthdate</mat-label>

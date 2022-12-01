@@ -14,7 +14,7 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
     CommonModule
   ],
   exports: [
-    ... MaterialUiModule.materialModules // ... = SPREAD OPERATOR (il permet de copier facilement un tableau ou un objet)
+    ... MaterialUiModule.materialModules // ... SPREAD OPERATOR (il permet de copier facilement un tableau ou un objet)
   ]
 })
 export class MaterialUiModule { 

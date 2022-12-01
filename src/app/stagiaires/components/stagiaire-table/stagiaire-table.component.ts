@@ -18,15 +18,14 @@ export class StagiaireTableComponent implements OnInit {
   public stopDate: Date | null = new Date(1950, 11, 31);   // On le rajoute pour introduire la condition dans le html
   public selectedStagiaire: Stagiaire | null = null;
   public isDetailHidden$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(true);
-
-  //constructor() { }
+  
   constructor(
     private stagiaireService: StagiaireService,       // Injection de dépendance
     private handleDetailService: HandleDetailService,
     private router: Router
   ) {}
 
-  // Exécution du constructeur, puis ensuite de Init :
+  // Exécution du constructeur, puis ensuite de ngOnInit :
   ngOnInit(): void {    
     this.stagiaireService.findAll().subscribe((stagiaires: Stagiaire[]) => {
       this.stagiaires = stagiaires;
@@ -37,7 +36,6 @@ export class StagiaireTableComponent implements OnInit {
   public onRemove(stagiaire: Stagiaire): void {
     console.log(`L'utilisateur souhaite supprimer ${stagiaire.getLastName()}`);
     this.stagiaireService.delete(stagiaire)
-    // Post-routage :
     .subscribe({
       next: (response: HttpResponse<any>) => {
         this.stagiaires.splice(
@@ -83,41 +81,14 @@ export class StagiaireTableComponent implements OnInit {
       return stagiaire.getBirthDate() > this.stopDate;
     }
     return stagiaire.getBirthDate() < this.stopDate;
-    /*
-    La fonction getVisibleStagiaireNumber(date) dans stagiaire.service.ts fonctionne correctement. Son principe :
-    return (date.getDate() === 31) ?
-      this.stagiaires.filter((obj: Stagiaire) => obj.getBirthDate() > date).length :
-      this.stagiaires.filter((obj: Stagiaire) => obj.getBirthDate() < date).length;
-
-      Ici ça devrait donner :
-      return (thisdate.getDate() === 31) ?
-      this.stagiaires.filter((obj: Stagiaire) => obj.getBirthDate() > thisdate).length :
-      this.stagiaires.filter((obj: Stagiaire) => obj.getBirthDate() < thisdate).length;
-    */
   }
 
   // Exercice du detail-component :
-
-  // public onClick(stagiaire: Stagiaire): void {
-  //   // Pour commencer je vais afficher un element, puis si ça marche, un composant
-  //   //console.log(JSON.stringify(stagiaire));
-  //   //this.isDetailHidden = false;
-  //   this.handleDetailService.setIsDetailHidden(false);
-  //   this.selectedStagiaire = stagiaire;   
-    // Exercice du handle-detail.service :
-  //   this.handleDetailService.setIsDetailHidden(false);    // On le met pour tester le console.log du ngOnInit
-  // }
-
   public onClick(stagiaire: Stagiaire): void {
     this.router.navigate(['/', 'stagiaire', stagiaire.getId()]);
   }
 
-  // public onDetailClose(event: boolean): void {     // On l'efface quand on bascule sur isDetailHidden$
-  //   this.isDetailHidden = event;
-  // }
-
   // Exercice du bubble : on définit ici le [config] du <span appBubble> de stagiaire-table.component.html
-
   public bubbleConfig: any = {
     height: '2em',
     width: '2em',

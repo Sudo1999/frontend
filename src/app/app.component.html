@@ -6,12 +6,11 @@
 </h1>
 
 <!-- Ici on a une première liste de stagiaires, immédiatement sous le titre -->
-<!--<ul>  
-      <li *ngFor="let stagiaire of stagiaires">
-        {{ stagiaire }}     // Interpolation
-      </li>
+<!--<ul>
   <li *ngFor="let stagiaire of stagiaires">
-    Le tableau stagiaires est celui de app.component.ts
+    {{ stagiaire }}
+  </li>
+  <li *ngFor="let stagiaire of stagiaires">
     {{ stagiaire.getLastName() }}
   </li>
 </ul> -->
@@ -19,12 +18,6 @@
 <!-- Routeur : on efface tout le reste et on ajoute seulement la ligne ci-dessous :
   au début stagiaire-table-component envoie ici du fait de la wild card -->
 <router-outlet></router-outlet>
-
-<!-- Le bouton appelle la fonction (désactivée) addStagiaire() de app.component.ts -->
-<!-- <button type="button" (click)="addStagiaire()">
-  Ajouter un stagiaire    
-</button>
-<p></p> -->
 
 <!-- <app-stagiaire-form></app-stagiaire-form> -->
 

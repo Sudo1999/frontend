@@ -1,6 +1,6 @@
-import { Inject, Injectable } from '@angular/core';   // Inject sert à injecter des "tokens" pour le Datepicker
+import { Inject, Injectable } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { DateAdapter, MAT_DATE_LOCALE } from '@angular/material/core';  // Adaptateur pour les dates et les locales (langues)
+import { DateAdapter, MAT_DATE_LOCALE } from '@angular/material/core';
 import { Stagiaire } from 'src/app/core/models/stagiaire';
 
 @Injectable({
@@ -13,7 +13,7 @@ export class FormBuilderService {
 
   constructor(
     private formBuilder: FormBuilder,
-    // Ajouts pour le Datepicker, pour définir la langue à utiliser dans FormBuilderService
+    // Ajouts pour le Datepicker, pour définir la langue à utiliser dans FormBuilderService :
     private adapter: DateAdapter<any>,
     @Inject(MAT_DATE_LOCALE) private locale: string
   ) {

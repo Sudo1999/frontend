@@ -5,14 +5,13 @@ import { HttpClientModule } from '@angular/common/http';
 import { ReactiveFormsModule } from '@angular/forms';
 // Ajout pour le Datepicker :
 // On aura souvent besoin du material-moment, c'est pourquoi on importe les modules et autres "tokens"
-// qui en viennent dans le shared.module.ts
-// La librairie material-moment offre une bonne souplesse dans la gestion des dates
+// qui en viennent dans le shared.module.ts. La librairie material-moment offre de la souplesse dans la gestion des dates
 import {
   MatMomentDateModule,
   MomentDateAdapter,
   MAT_MOMENT_DATE_ADAPTER_OPTIONS,
   MAT_MOMENT_DATE_FORMATS
-} from '@angular/material-moment-adapter';  // Pour le faire reconnaître => npm i @angular/material-moment-adapter@13
+} from '@angular/material-moment-adapter';
 import {
   DateAdapter,
   MAT_DATE_FORMATS,
@@ -20,13 +19,12 @@ import {
 } from '@angular/material/core';
 import 'moment/locale/fr';
 
-
 @NgModule({
   declarations: [],
   imports: [
     CommonModule
   ],
-  exports: [            // Modifications lors de l'ajout du material-ui
+  exports: [
     MaterialUiModule,
     HttpClientModule,
     ReactiveFormsModule,
