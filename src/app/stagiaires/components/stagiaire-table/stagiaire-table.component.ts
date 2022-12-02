@@ -63,6 +63,10 @@ export class StagiaireTableComponent implements OnInit {
     return mynumber;
   }
 
+  public onUpdate(stagiaire: Stagiaire): void {
+    
+  }
+
   public filterChanged(event: Date | null): void {
     console.log(`Filter has changed to : ${event}`);
     this.stopDate = event;
