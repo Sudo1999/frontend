@@ -1,7 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { AbstractControl, FormControl, FormGroup, Validators } from '@angular/forms';
+import { ActivatedRoute, Router, UrlSegment } from '@angular/router';
+import { Observable, Subscription } from 'rxjs';
 import { Stagiaire } from 'src/app/core/models/stagiaire';
 import { StagiaireService } from 'src/app/core/services/stagiaire.service';
+import { StagiaireDto } from '../../dto/stagiaire-dto';
+import { FormBuilderService } from '../../services/form-builder.service';
 
 @Component({
   selector: 'app-stagiaire-form',
@@ -10,51 +14,78 @@ import { StagiaireService } from 'src/app/core/services/stagiaire.service';
 })
 export class StagiaireFormComponent implements OnInit {
 
-  stagiaire: Stagiaire = new Stagiaire();
-
-  /*
-  stagiaireForm: FormGroup = new FormGroup({
-    //firstName: FormControl = new FormControl('')
-    //lastName: FormControl = new FormControl('')
-    lastName: new FormControl('', Validators.required),
-    firstName: new FormControl('', Validators.required),
-    email: new FormControl('', [Validators.required, Validators.email]),
-    phoneNumber: new FormControl('', Validators.pattern("^[\\+]?[(]?[0-9]{3}[)]?[-\\s\\.]?[0-9]{3}[-\\s\\.]?[0-9]{4,6}$")),
-    //birthDate: new FormControl(new Date())
-    birthDate: new FormControl('')
-  });*/
-
-  stagiaireForm: FormGroup = new FormGroup({
-    lastName: new FormControl('', Validators.required),
-    firstName: new FormControl('', Validators.required),
-    email: new FormControl('', [Validators.required, Validators.email]),
-    phoneNumber: new FormControl('', Validators.pattern("^[\\+]?[(]?[0-9]{3}[)]?[-\\s\\.]?[0-9]{3}[-\\s\\.]?[0-9]{4,6}$")),
-    //birthDate: new FormControl(new Date())
-    birthDate: new FormControl('')
-  });
+  stagiaireForm!: FormGroup;
+  public addMode: boolean = true;
 
   constructor( 
-    private stagiaireService: StagiaireService  // Injection de dépendance
+    private stagiaireService: StagiaireService,  // Injection de dépendance
+    private formBuilderService: FormBuilderService,
+    private router: Router,
+    private route: ActivatedRoute
   ) { }
 
   ngOnInit(): void {
+    const data: any = this.route.snapshot.data;
+    console.log(`${data.form instanceof FormGroup ? 'OK' : 'KO'}`);
+    this.stagiaireForm = data.form;
+
+    console.log(this.stagiaireForm.controls['id'] instanceof FormControl);
+    (data.form.value.id !== 0) ? this.addMode = false : this.addMode = true;
+
+    /*
+    this.route.url    // Observable
+        .subscribe((url: UrlSegment[]) => {          
+          console.log(url);
+          // Suis-je en mode update ou add ?
+          if(url.filter((urlSegment: UrlSegment) => urlSegment.path === 'update').length) {
+            // Si tableau vide => on n'a pas trouvé update
+              console.log('Mode update');
+              this.addMode = false;
+              // On récupère le id du stagiaire :
+              //this.stagiaireService.findOne(parseInt(url[url.length - 1].path));
+              this.stagiaireService.findOne(+url[url.length - 1].path) // Le + permet de renvoyer un chiffre (c'est un raccourci)
+              .subscribe((stagiaire: Stagiaire) => {
+                console.log(`Got ${stagiaire.getId()} ready to update`);
+                this.stagiaireForm = this.formBuilderService.build(stagiaire).getForm();
+              });
+          } else {
+            console.log('Mode add');
+          }
+        });
+    this.stagiaireForm = this.formBuilderService.build(new Stagiaire()).getForm();*/
   }
+
+  // Méthode "helper"
+
+  /**
+   * Returns a list of form controls
+   * @usage In template : c['lastname']
+   * instead of stagiaireForm.controls['lastname']
+   */
+public get c(): {[key: string]: AbstractControl} {
+  return this.stagiaireForm.controls;
+}
   
   onSubmit() {
     // TODO: Use EventEmitter with form value
     console.log("Le onSubmit a fonctionné : ");
-    console.log(this.stagiaireForm.value);    // Cela marche avec un string et une virgule (pas de +)
+    console.log(this.stagiaireForm.value);
+    console.log("Delegate add stagiaire:", this.stagiaireForm.value);
+    const dto: StagiaireDto = new StagiaireDto(this.stagiaireForm.value);
 
-    const stagiaire: Stagiaire = new Stagiaire();
-    stagiaire.setLastName(this.stagiaireForm.value.lastName);
-    stagiaire.setFirstName(this.stagiaireForm.value.firstName);
-    stagiaire.setEmail(this.stagiaireForm.value.email);
-    stagiaire.setPhoneNumber(this.stagiaireForm.value.phoneNumber);
-    //stagiaire.setBirthDate(new Date (this.stagiaireForm.value.birthDate));
-    if (this.stagiaireForm.value.birthDate != null) {
-      stagiaire.setBirthDate(new Date(this.stagiaireForm.value.birthDate))
+    let subscription: Observable<any>;
+    if (this.addMode) {
+      subscription = this.stagiaireService.add(dto);
+    } else {
+      // Invoke service update method
+      subscription = this.stagiaireService.update(
+        this.stagiaireForm.value
+      )
     }
-    this.stagiaireService.add(stagiaire);
-    console.log(stagiaire);
+    subscription.subscribe(() => this.goHome());
+  }
+
+  public goHome(): void {
+    this.router.navigate(['/', 'home']);
   }
 }

@@ -20,15 +20,6 @@ export class AppComponent {
     }
   }
 
-  /*
-  public stagiaires: Array<string> = [
-    'Jean-Luc',
-    'Jérémy',
-    'Charles',
-    'Martine',
-    'Fanny'
-  ]*/
-
   public stagiaires: Array<Stagiaire> = this.stagiaireService.getStagiaires();
   public inputType: string = 'password';
   public titreHtml = 'HyperText Markup Language';
@@ -47,8 +38,6 @@ export class AppComponent {
       setTimeout(
         () => {this.inputType = 'password'}, 1600
       )
-    } //else {
-      //this.inputType= 'password';
-    //}
+    }
   }
 }
