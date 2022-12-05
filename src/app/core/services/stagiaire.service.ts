@@ -134,4 +134,27 @@ export class StagiaireService {
         })
       );
   }
+
+  public update(stagiaire: Stagiaire): Observable<Stagiaire> {
+    // Dans l'absolu il faudrait rajouter une ligne pour être sûrs que l'objet récupéré sera transformé en stagiaire.
+    // On ne peut pas être sûrs sinon que le back renverra exactement l'objet et seulement lui :
+    // const stagiaire: Stagiaire = stagiaireDto.toStagiaire();
+    return this.httpClient.put<Stagiaire>(
+      `${this.controllerBaseUrl}`,
+      stagiaire
+    )
+    .pipe(
+      take(1),
+      map((anyStagiaire: any) => {
+        const stagiaire: Stagiaire = new Stagiaire();
+        stagiaire.setId(anyStagiaire.id!);
+        stagiaire.setLastName(anyStagiaire.lastName);
+        stagiaire.setFirstName(anyStagiaire.firstName);
+        stagiaire.setBirthDate(new Date(anyStagiaire.birthdate));
+        stagiaire.setPhoneNumber(anyStagiaire.phoneNumber);
+        stagiaire.setEmail(anyStagiaire.email);
+        return stagiaire;
+      })
+    )
+  }
 }

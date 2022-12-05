@@ -64,7 +64,7 @@ export class StagiaireTableComponent implements OnInit {
   }
 
   public onUpdate(stagiaire: Stagiaire): void {
-    
+    this.router.navigate(['/', 'stagiaire', 'update', stagiaire.getId()]);  // A chaque virgule correspond un slash dans l'adresse
   }
 
   public filterChanged(event: Date | null): void {
