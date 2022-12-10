@@ -3,11 +3,13 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  production: false,    // C'est la première ligne de environment, à laquelle on ajoute ensuite des compléments
+  production: false,    // C'est la première ligne de environment.ts, à laquelle on ajoute ensuite une autre ligne :
   apiBaseUrl: 'http://localhost:8080/api'   // 8080 est le port d'origine du projet Spring Boot
   //apiBaseUrl: 'http://localhost:3000'   // localhost:3000 est l'url du serveur json (npm run json)
-  /* A ce stade l'url http://localhost:4200/ ne fonctionne que si une des deux lignes du dessus est accessible.
-  Si l'une des deux lignes ('http://localhost:8080/api' ou 'http://localhost:3000') est accessible on obtient le tableau vide.
+
+  /* Le projet une fois connecté au serveur ou à la base, l'url http://localhost:4200/ ne fonctionne que si
+      l'apiBaseUrl peut indiquer au navigateur comment interpréter l'adresse. Dans un cas l'url conduit à
+      'http://localhost:8080/api', et dans l'autre à 'http://localhost:3000'.
   */
 };
 
