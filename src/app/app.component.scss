@@ -1,0 +1,22 @@
+$title-backgroud-color: rgb(25,25,200);
+$std-color: rgb(255,255,255);
+
+h1 {
+    background-color: $title-backgroud-color;
+    color: $std-color;
+    line-height: 2em;       // La hauteur du bloc de titre est définie ici
+    vertical-align: middle;     // vertical-align et text-align se positionnent par rapport au bloc
+    text-align: center;
+}
+
+ul {
+    list-style-type: none;
+    li {
+        border: solid 1px $title-backgroud-color;
+        border-radius: 0.5em;
+        margin-bottom: 0.5em;
+        &:last-child {
+            margin-bottom: 0;   // Distance entre le dernier élément de la liste et l'élément qui suit (ici un bouton)
+        }
+    }
+}
