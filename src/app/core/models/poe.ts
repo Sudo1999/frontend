@@ -1,12 +1,11 @@
 export class Poe {
+
     private id: number = 0;
     private title: string = "";
     private beginDate!: Date;
     private endDate!: Date;
     private poeType: string = "";
     private idAelion: string = "";
-    
-    
 
     public getId(): number {
         return this.id;
@@ -48,7 +47,5 @@ export class Poe {
     }
     public setIdAelion(idAelion: string): void {
         this.idAelion = idAelion;
-    }
-
-    
+    }    
 }
