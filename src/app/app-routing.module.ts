@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { PoeWelcomeComponent } from './poes/components/poe-welcome/poe-welcome.component';
 import { StagiaireDetailComponent } from './stagiaires/components/stagiaire-detail/stagiaire-detail.component';
 import { StagiaireFormComponent } from './stagiaires/components/stagiaire-form/stagiaire-form.component';
 import { StagiaireTableComponent } from './stagiaires/components/stagiaire-table/stagiaire-table.component';
@@ -19,6 +20,24 @@ export class AppRoutingModule {
     },
     {
       path: 'home',
+      component: PoeWelcomeComponent  // A la route 'home' correspond cette adresse
+    },
+    // {
+    //   path: 'poe/add',
+    //   component: PoeFormComponent,
+    //   resolve: {form: PoeResolver}
+    // },
+    // {
+    //   path: 'poe/:id',    // Paramètre de la route => le ":"
+    //   component: PoeDetailComponent
+    // },
+    // {
+    //   path: 'poe/update/:id',
+    //   component: PoeFormComponent,
+    //   resolve: {form: PoeResolver}
+    // },
+    {
+      path: 'stagiaire',
       component: StagiaireTableComponent  // A la route 'home' correspond cette adresse
     },
     {

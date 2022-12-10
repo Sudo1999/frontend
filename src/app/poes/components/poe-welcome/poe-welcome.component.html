@@ -1,0 +1,32 @@
+<!--<p>poe-welcome works!</p>-->
+
+<p></p>
+<table>
+    <thead>
+        <tr>
+            <th>Titre de la POE</th>
+            <th>Date de début</th>
+            <th>Date de fin</th>
+            <th>&nbsp;</th>
+        </tr>
+    </thead>
+
+    <tbody>
+        <ng-container *ngFor="let poe of poes">
+            <tr>
+                <td>
+                    {{poe.getTitle()}}
+                </td>
+                <td>
+                    {{poe.getBeginDate().toLocaleDateString()}}
+                </td>
+                <td>
+                    {{poe.getEndDate().toLocaleDateString()}}
+                </td>
+                <td>
+                    <button type="button" (click)="onRemove(poe)">x</button>
+                    <button type="button" (click)="onUpdate(poe)">u</button>
+                </td>
+            </tr>
+        </ng-container>
+    </tbody>
