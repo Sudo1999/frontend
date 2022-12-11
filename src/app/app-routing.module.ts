@@ -22,13 +22,17 @@ export class AppRoutingModule {
       path: 'home',
       component: PoeWelcomeComponent  // A la route 'home' correspond cette adresse
     },
+    {
+      path: 'poe',
+      component: PoeWelcomeComponent
+    },
     // {
     //   path: 'poe/add',
     //   component: PoeFormComponent,
     //   resolve: {form: PoeResolver}
     // },
     // {
-    //   path: 'poe/:id',    // Paramètre de la route => le ":"
+    //   path: 'poe/:id',
     //   component: PoeDetailComponent
     // },
     // {
@@ -38,7 +42,7 @@ export class AppRoutingModule {
     // },
     {
       path: 'stagiaire',
-      component: StagiaireTableComponent  // A la route 'home' correspond cette adresse
+      component: StagiaireTableComponent
     },
     {
       path: 'stagiaire/add',

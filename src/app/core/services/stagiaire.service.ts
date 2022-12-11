@@ -12,14 +12,14 @@ import { Stagiaire } from '../models/stagiaire';
 export class StagiaireService {
 
   private stagiaires: Array<Stagiaire> = [];
-  // Rajouté pour l'environnement :
+  // Rajouté pour aller chercher l'information dans environment.ts :
   private controllerBaseUrl!: string;
 
   constructor(
     private httpClient: HttpClient  // Le service httpClient contient les méthodes CRUD
   ) {
     //this.feedIt();  // On coupe pour aller chercher les données dans le back
-    this.controllerBaseUrl = `${environment.apiBaseUrl}/stagiaire`;
+    this.controllerBaseUrl = `${environment.apiBaseUrl}/stagiaire`; // apiBaseUrl est définie dans environment.ts
   }
 
   private feedIt(): void {
@@ -70,7 +70,7 @@ export class StagiaireService {
     // Mise en relation avec le back :
     // 1. Call backend
     return this.httpClient.delete(
-      `${this.controllerBaseUrl}/${stagiaire.getId()}`,
+      `${this.controllerBaseUrl}/${stagiaire.getId()}`, // => `${environment.apiBaseUrl}/stagiaire/${stagiaire.getId()}`
       // Suite post-routage :
       { observe: 'response' }
     );
@@ -96,7 +96,7 @@ export class StagiaireService {
   }
 
   public findOne(id: number): Observable<Stagiaire> {
-    return this.httpClient.get<any>(`${environment.apiBaseUrl}/stagiaire/${id}`)
+    return this.httpClient.get<any>(`${this.controllerBaseUrl}/${id}`)
       .pipe(
         take(1),
         map((inputStagiaire: any) => {
@@ -112,9 +112,9 @@ export class StagiaireService {
       );
   }
 
-  public add(stagiaire: StagiaireDto): Observable<Stagiaire> {
-    console.log("Le add a appelé ", stagiaire);
-    return this.httpClient.post<StagiaireDto>(this.controllerBaseUrl, stagiaire)
+  public add(stagiaireInput: StagiaireDto): Observable<Stagiaire> {
+    console.log("Le add a appelé ", stagiaireInput);
+    return this.httpClient.post<StagiaireDto>(this.controllerBaseUrl, stagiaireInput)
       .pipe(
         take(1),
         map((stagiaireDto: StagiaireDto) => {
@@ -148,5 +148,4 @@ export class StagiaireService {
         return stagiaire;
       })
     )
-  }
-}
+  }}

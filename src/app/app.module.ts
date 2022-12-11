@@ -13,6 +13,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { SharedModule } from './shared/shared.module';
 import { PoeWelcomeComponent } from './poes/components/poe-welcome/poe-welcome.component';
+import { PoeFormComponent } from './poes/components/poe-form/poe-form.component';
 
 @NgModule({
   declarations: [
@@ -23,7 +24,8 @@ import { PoeWelcomeComponent } from './poes/components/poe-welcome/poe-welcome.c
     InitialsPipe,
     BubbleDirective,
     StagiaireFormComponent,
-    PoeWelcomeComponent
+    PoeWelcomeComponent,
+    PoeFormComponent
   ],
   imports: [
     BrowserModule,
