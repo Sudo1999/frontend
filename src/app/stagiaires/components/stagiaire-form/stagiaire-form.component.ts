@@ -14,10 +14,10 @@ import { FormBuilderService } from '../../services/form-builder.service';
 })
 export class StagiaireFormComponent implements OnInit {
 
-  stagiaireForm!: FormGroup;
+  public stagiaireForm!: FormGroup;
   public addMode: boolean = true;
 
-  constructor( 
+  constructor(
     private stagiaireService: StagiaireService,  // Injection de dépendance
     private formBuilderService: FormBuilderService,
     private router: Router,
@@ -26,33 +26,30 @@ export class StagiaireFormComponent implements OnInit {
 
   ngOnInit(): void {
     const data: any = this.route.snapshot.data;
-    console.log(`${data.form instanceof FormGroup ? 'OK' : 'KO'}`);
     this.stagiaireForm = data.form;
+    console.log(`${this.stagiaireForm instanceof FormGroup ? 'stagiaireForm OK' : 'stagiaireForm KO'}`);
+    console.log(this.stagiaireForm.value.id);
 
-    console.log(this.stagiaireForm.controls['id'] instanceof FormControl);
-    (data.form.value.id !== 0) ? this.addMode = false : this.addMode = true;
-
-    /*
     this.route.url    // Observable
-        .subscribe((url: UrlSegment[]) => {          
-          console.log(url);
-          // Suis-je en mode update ou add ?
-          if(url.filter((urlSegment: UrlSegment) => urlSegment.path === 'update').length) {
-            // Si tableau vide => on n'a pas trouvé update
-              console.log('Mode update');
-              this.addMode = false;
-              // On récupère le id du stagiaire :
-              //this.stagiaireService.findOne(parseInt(url[url.length - 1].path));
-              this.stagiaireService.findOne(+url[url.length - 1].path) // Le + permet de renvoyer un chiffre (c'est un raccourci)
-              .subscribe((stagiaire: Stagiaire) => {
-                console.log(`Got ${stagiaire.getId()} ready to update`);
-                this.stagiaireForm = this.formBuilderService.build(stagiaire).getForm();
-              });
-          } else {
-            console.log('Mode add');
-          }
-        });
-    this.stagiaireForm = this.formBuilderService.build(new Stagiaire()).getForm();*/
+      .subscribe((url: UrlSegment[]) => {
+        // Suis-je en mode update ou add ?
+        console.log(url);
+        console.log(url.filter((urlSegment: UrlSegment) => urlSegment.path === 'update').length);
+        if (url.filter((urlSegment: UrlSegment) => urlSegment.path === 'update').length) {
+          // Si le tableau n'est pas vide, length n'est pas nul => on a trouvé update
+          console.log('Mode update');
+          this.addMode = false;
+          // On récupère le id du stagiaire :
+          //this.stagiaireService.findOne(parseInt(url[url.length - 1].path));
+          this.stagiaireService.findOne(+url[url.length - 1].path) // Le + remplace le parseInt (c'est un raccourci)
+            .subscribe((stagiaire: Stagiaire) => {
+              console.log(`Got ${stagiaire.getId()} ready to update`);
+              this.stagiaireForm = this.formBuilderService.build(stagiaire).getForm();
+            });
+        } else {
+          console.log('Mode add');
+        }
+      });
   }
 
   // Méthode "helper"
@@ -62,10 +59,10 @@ export class StagiaireFormComponent implements OnInit {
    * @usage In template : c['lastname']
    * instead of stagiaireForm.controls['lastname']
    */
-public get c(): {[key: string]: AbstractControl} {
-  return this.stagiaireForm.controls;
-}
-  
+  public get c(): { [key: string]: AbstractControl } {
+    return this.stagiaireForm.controls;
+  }
+
   onSubmit() {
     // TODO: Use EventEmitter with form value
     console.log("Le onSubmit a fonctionné : ");

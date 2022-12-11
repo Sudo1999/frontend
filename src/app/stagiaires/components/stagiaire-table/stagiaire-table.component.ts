@@ -48,7 +48,6 @@ export class StagiaireTableComponent implements OnInit {
     // pour ne pas mettre la logique ici, et pour la reproductibilité
     const stagiaireIndex: number = this.stagiaires.findIndex(
       (obj: Stagiaire) => obj.getId() == stagiaire.getId());
-    this.stagiaires.splice(stagiaireIndex, 1);
   }
 
   public onFilter(): number {
