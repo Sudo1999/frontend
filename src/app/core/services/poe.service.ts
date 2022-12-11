@@ -40,7 +40,7 @@ export class PoeService {
   }
 
   public findOne(id: number): Observable<Poe> {
-    return this.httpClient.get<any>(`${environment.apiBaseUrl}/poe/${id}`)
+    return this.httpClient.get<any>(`${this.controllerBaseUrl}/${id}`)
       .pipe(
         take(1),
         map((inputPoe: any) => {
@@ -56,8 +56,8 @@ export class PoeService {
       );
   }
 
-  public add(poe: PoeDto): Observable<Poe> {
-    return this.httpClient.post<PoeDto>(this.controllerBaseUrl, poe)
+  public add(PoeInput: PoeDto): Observable<Poe> {
+    return this.httpClient.post<PoeDto>(this.controllerBaseUrl, PoeInput)
       .pipe(
         take(1),
         map((poeDto: PoeDto) => {
