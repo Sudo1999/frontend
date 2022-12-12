@@ -17,7 +17,7 @@ export class StagiaireFormComponent implements OnInit {
   stagiaireForm!: FormGroup;
   public addMode: boolean = true;
 
-  constructor( 
+  constructor(
     private stagiaireService: StagiaireService,  // Injection de dépendance
     private formBuilderService: FormBuilderService,
     private router: Router,
@@ -32,7 +32,6 @@ export class StagiaireFormComponent implements OnInit {
     console.log(this.stagiaireForm.controls['id'] instanceof FormControl);
     (data.form.value.id !== 0) ? this.addMode = false : this.addMode = true;
 
-    /*
     this.route.url    // Observable
         .subscribe((url: UrlSegment[]) => {          
           console.log(url);
@@ -52,7 +51,7 @@ export class StagiaireFormComponent implements OnInit {
             console.log('Mode add');
           }
         });
-    this.stagiaireForm = this.formBuilderService.build(new Stagiaire()).getForm();*/
+    this.stagiaireForm = this.formBuilderService.build(new Stagiaire()).getForm();
   }
 
   // Méthode "helper"
@@ -62,10 +61,10 @@ export class StagiaireFormComponent implements OnInit {
    * @usage In template : c['lastname']
    * instead of stagiaireForm.controls['lastname']
    */
-public get c(): {[key: string]: AbstractControl} {
-  return this.stagiaireForm.controls;
-}
-  
+  public get c(): { [key: string]: AbstractControl } {
+    return this.stagiaireForm.controls;
+  }
+
   onSubmit() {
     // TODO: Use EventEmitter with form value
     console.log("Le onSubmit a fonctionné : ");

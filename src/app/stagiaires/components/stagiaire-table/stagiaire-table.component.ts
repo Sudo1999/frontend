@@ -43,12 +43,10 @@ export class StagiaireTableComponent implements OnInit {
           // Snackbar
       }
     });
-
     //this.stagiaires.splice(stagiaire.getId(), 1);   // On ne fait pas ça comme ça
     // pour ne pas mettre la logique ici, et pour la reproductibilité
     const stagiaireIndex: number = this.stagiaires.findIndex(
       (obj: Stagiaire) => obj.getId() == stagiaire.getId());
-    this.stagiaires.splice(stagiaireIndex, 1);
   }
 
   public onFilter(): number {

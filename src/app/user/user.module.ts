@@ -3,8 +3,6 @@ import { CommonModule } from '@angular/common';
 import { LoginFormComponent } from './login/login-form/login-form.component'
 import { SharedModule } from '../shared/shared.module';
 
-
-
 @NgModule({
   declarations: [
     LoginFormComponent

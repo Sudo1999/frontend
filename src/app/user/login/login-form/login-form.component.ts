@@ -1,17 +1,23 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
+import { Subscription, take } from 'rxjs';
+import { UserService } from '../../services/user.service';
 
 @Component({
   selector: 'app-login-form',
   templateUrl: './login-form.component.html',
   styleUrls: ['./login-form.component.scss']
 })
-export class LoginFormComponent implements OnInit {
+export class LoginFormComponent implements OnInit, OnDestroy {
 
   public loginForm!: FormGroup;
+  private subscription!: Subscription
 
   constructor(
-    private formBuilder: FormBuilder
+    private formBuilder: FormBuilder,
+    private userService: UserService,
+    private router: Router
   ) { }
 
   ngOnInit(): void {
@@ -34,4 +40,21 @@ export class LoginFormComponent implements OnInit {
     });
   }
 
+  ngOnDestroy(): void {
+    if (this.subscription !== undefined) {
+      this.subscription.unsubscribe();
+    }
+  }
+
+  public onLogin(): void {
+    //this.userService.login(this.loginForm.value)
+    this.subscription = this.userService.login(this.loginForm.value)
+    .subscribe((authenticated: boolean) => {
+      if (authenticated) {
+        this.router.navigate(['/', 'home']);
+      } else {
+        this.loginForm.reset();
+      }
+    })
+  }
 }

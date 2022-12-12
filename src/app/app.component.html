@@ -4,6 +4,19 @@
 <h1 (click)="toggleTitle()">
   {{title}}
 </h1>
+<nav>
+  <ul>
+    <li>
+      <a [routerLink]="['/', 'home']">Home</a>
+    </li>
+    <li>
+      POE list
+    </li>
+    <li>
+      <a [routerLink]="['/', 'login']">Login/Logout</a>
+    </li>
+  </ul>
+</nav>
 
 <!-- Ici on a une première liste de stagiaires, immédiatement sous le titre -->
 <!--<ul>
