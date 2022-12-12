@@ -4,6 +4,7 @@ import { StagiaireDetailComponent } from './stagiaires/components/stagiaire-deta
 import { StagiaireFormComponent } from './stagiaires/components/stagiaire-form/stagiaire-form.component';
 import { StagiaireTableComponent } from './stagiaires/components/stagiaire-table/stagiaire-table.component';
 import { StagiaireResolver } from './stagiaires/resolvers/stagiaire.resolver';
+import { LoginFormComponent } from './user/login/login-form/login-form.component';
 
 @NgModule({
   imports: [RouterModule.forRoot(AppRoutingModule.routes)],
@@ -14,8 +15,12 @@ export class AppRoutingModule {
   public static routes: Routes = [
     {
       path: '',
-      redirectTo: 'home',  // Redirige vers un autre chemain, ici 'home'
+      redirectTo: 'login',  // Redirige vers un autre chemin, ici 'login'
       pathMatch: 'full'   // Important pour que toute l'adresse soit lue
+    },
+    {
+      path: 'login',
+      component: LoginFormComponent
     },
     {
       path: 'home',

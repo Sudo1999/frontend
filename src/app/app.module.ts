@@ -12,6 +12,7 @@ import { StagiaireFormComponent } from './stagiaires/components/stagiaire-form/s
 import { ReactiveFormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { SharedModule } from './shared/shared.module';
+import { UserModule } from './user/user.module';
 
 @NgModule({
   declarations: [
@@ -29,7 +30,8 @@ import { SharedModule } from './shared/shared.module';
     AppRoutingModule,
     //ReactiveFormsModule,
     BrowserAnimationsModule,
-    SharedModule
+    SharedModule,
+    UserModule
   ],
   providers: [],
   bootstrap: [AppComponent]   // AppModule appelle AppComponent (app.component.ts)
