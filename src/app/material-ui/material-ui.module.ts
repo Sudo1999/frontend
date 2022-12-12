@@ -7,6 +7,9 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 // Exercice du Datepicker :
 import { MatDatepickerModule } from '@angular/material/datepicker';
+// Exercice du login :
+import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 
 @NgModule({
   declarations: [],
@@ -24,6 +27,9 @@ MatInputModule,
 MatButtonModule,
 MatIconModule,
 // Exportation du DatepickerModule depuis le MaterialUiModule :
-MatDatepickerModule
+MatDatepickerModule,
+// Login :
+MatSnackBarModule,
+MatSlideToggleModule
   ]
 }
