@@ -1,5 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import { APP_INITIALIZER, NgModule } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -13,6 +13,20 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { SharedModule } from './shared/shared.module';
 import { UserModule } from './user/user.module';
+import { AppInitializerService } from './core/services/app-initializer.service';
+
+// function initializeApp(): Promise<any> {
+//   return new Promise((resolve, reject) => {
+//     // Do some asynchronous stuff
+//     //resolve();
+//   });
+// }
+
+export function initializeApp(appInitService: AppInitializerService) {
+  return (): Promise<any> => {
+    return appInitService.init();
+  }
+}
 
 @NgModule({
   declarations: [
@@ -20,6 +34,7 @@ import { UserModule } from './user/user.module';
     StagiaireTableComponent,
     StagiaireFilterComponent,
     StagiaireDetailComponent,
+    StagiaireFormComponent,
     InitialsPipe,
     BubbleDirective,
     StagiaireFormComponent
@@ -33,7 +48,15 @@ import { UserModule } from './user/user.module';
     SharedModule,
     UserModule
   ],
-  providers: [],
+  providers: [
+    AppInitializerService,
+    {
+      provide: APP_INITIALIZER,
+      useFactory: initializeApp,
+      deps: [AppInitializerService],
+      multi: true
+    }
+  ],
   bootstrap: [AppComponent]   // AppModule appelle AppComponent (app.component.ts)
 })
 export class AppModule { }

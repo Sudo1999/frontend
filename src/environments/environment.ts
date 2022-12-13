@@ -4,11 +4,14 @@
 
 export const environment = {
   production: false,    // C'est la première ligne de environment, à laquelle on ajoute ensuite des compléments
-  apiBaseUrl: 'http://localhost:8080/api'   // 8080 est le port d'origine du projet Spring Boot
+  apiBaseUrl: 'http://localhost:8080/api',   // 8080 est le port d'origine du projet Spring Boot
   //apiBaseUrl: 'http://localhost:3000'   // localhost:3000 est l'url du serveur json (npm run json)
   /* A ce stade l'url http://localhost:4200/ ne fonctionne que si une des deux lignes du dessus est accessible.
   Si l'une des deux lignes ('http://localhost:8080/api' ou 'http://localhost:3000') est accessible on obtient le tableau vide.
   */
+  storageKeys: {
+    'AUTH': 'auth'
+  }
 };
 
 /*
