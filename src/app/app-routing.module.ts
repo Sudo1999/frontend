@@ -4,6 +4,7 @@ import { StagiaireDetailComponent } from './stagiaires/components/stagiaire-deta
 import { StagiaireFormComponent } from './stagiaires/components/stagiaire-form/stagiaire-form.component';
 import { StagiaireTableComponent } from './stagiaires/components/stagiaire-table/stagiaire-table.component';
 import { StagiaireResolver } from './stagiaires/resolvers/stagiaire.resolver';
+import { HasUserGuard } from './user/guards/has-user.guard';
 import { NoUserGuard } from './user/guards/no-user.guard';
 import { LoginFormComponent } from './user/login/login-form/login-form.component';
 
@@ -28,21 +29,33 @@ export class AppRoutingModule {
     },
     {
       path: 'home',
-      component: StagiaireTableComponent  // A la route 'home' correspond cette adresse
+      component: StagiaireTableComponent,  // A la route 'home' correspond cette adresse
+      canActivate: [
+        HasUserGuard
+      ]
     },
     {
       path: 'stagiaire/add',
       component: StagiaireFormComponent,
-      resolve: {form: StagiaireResolver}
+      resolve: {form: StagiaireResolver},
+      canActivate: [
+        HasUserGuard
+      ]
     },
     {
       path: 'stagiaire/:id',    // Paramètre de la route => le ":"
-      component: StagiaireDetailComponent
+      component: StagiaireDetailComponent,
+      canActivate: [
+        HasUserGuard
+      ]
     },
     {
       path: 'stagiaire/update/:id',
       component: StagiaireFormComponent,
-      resolve: {form: StagiaireResolver}
+      resolve: {form: StagiaireResolver},
+      canActivate: [
+        HasUserGuard
+      ]
     },
     {
       path: '**',   // Wild card : Impérativement la dernière route du routeur
