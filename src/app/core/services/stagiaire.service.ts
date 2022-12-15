@@ -12,14 +12,14 @@ import { Stagiaire } from '../models/stagiaire';
 export class StagiaireService {
 
   private stagiaires: Array<Stagiaire> = [];
-  // Rajouté pour l'environnement :
+  // Rajouté pour aller chercher l'information dans environment.ts :
   private controllerBaseUrl!: string;
 
   constructor(
     private httpClient: HttpClient  // Le service httpClient contient les méthodes CRUD
   ) {
     //this.feedIt();  // On coupe pour aller chercher les données dans le back
-    this.controllerBaseUrl = `${environment.apiBaseUrl}/stagiaire`;
+    this.controllerBaseUrl = `${environment.apiBaseUrl}/stagiaire`; // apiBaseUrl est définie dans environment.ts
   }
 
   private feedIt(): void {
@@ -48,7 +48,7 @@ export class StagiaireService {
     stagiaire.setFirstName("James");
     stagiaire.setPhoneNumber("01 02 03 04 05");
     stagiaire.setEmail("bond@outlook.com");
-    stagiaire.setBirthDate(new Date(1900, 1, 1));
+    stagiaire.setBirthDate(new Date(1900, 0, 7));
     this.stagiaires.push(stagiaire);
   }
 
@@ -66,16 +66,13 @@ export class StagiaireService {
   }
 
   public delete(stagiaire: Stagiaire): Observable<HttpResponse<any>> {
-    console.log(`Le composant me demande de supprimer ${stagiaire.getFirstName()} ${stagiaire.getLastName()}
-     id ${stagiaire.getId()}`);
+    console.log(`Le composant veut supprimer ${stagiaire.getFirstName()} ${stagiaire.getLastName()} id ${stagiaire.getId()}`);
     // Mise en relation avec le back :
-    //1. Call backend
+    // 1. Call backend
     return this.httpClient.delete(
-      `${this.controllerBaseUrl}/${stagiaire.getId()}`,
+      `${this.controllerBaseUrl}/${stagiaire.getId()}`, // => `${environment.apiBaseUrl}/stagiaire/${stagiaire.getId()}`
       // Suite post-routage :
-      {
-        observe: 'response'
-      }
+      { observe: 'response' }
     );
   }
 
@@ -99,9 +96,7 @@ export class StagiaireService {
   }
 
   public findOne(id: number): Observable<Stagiaire> {
-    return this.httpClient.get<any>(
-      `${environment.apiBaseUrl}/stagiaire/${id}`
-    )
+    return this.httpClient.get<any>(`${this.controllerBaseUrl}/${id}`)
       .pipe(
         take(1),
         map((inputStagiaire: any) => {
@@ -117,9 +112,9 @@ export class StagiaireService {
       );
   }
 
-  public add(stagiaire: StagiaireDto): Observable<Stagiaire> {
-    console.log("Le add a appelé ", stagiaire);
-    return this.httpClient.post<StagiaireDto>(this.controllerBaseUrl, stagiaire)
+  public add(stagiaireInput: StagiaireDto): Observable<Stagiaire> {
+    console.log("Le add a appelé ", stagiaireInput);
+    return this.httpClient.post<StagiaireDto>(this.controllerBaseUrl, stagiaireInput)
       .pipe(
         take(1),
         map((stagiaireDto: StagiaireDto) => {
@@ -139,10 +134,7 @@ export class StagiaireService {
     // Dans l'absolu il faudrait rajouter une ligne pour être sûrs que l'objet récupéré sera transformé en stagiaire.
     // On ne peut pas être sûrs sinon que le back renverra exactement l'objet et seulement lui :
     // const stagiaire: Stagiaire = stagiaireDto.toStagiaire();
-    return this.httpClient.put<Stagiaire>(
-      `${this.controllerBaseUrl}`,
-      stagiaire
-    )
+    return this.httpClient.put<Stagiaire>(`${this.controllerBaseUrl}`, stagiaire)
     .pipe(
       take(1),
       map((anyStagiaire: any) => {
@@ -156,5 +148,4 @@ export class StagiaireService {
         return stagiaire;
       })
     )
-  }
-}
+  }}

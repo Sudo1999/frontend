@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { PoeWelcomeComponent } from './poes/components/poe-welcome/poe-welcome.component';
 import { StagiaireDetailComponent } from './stagiaires/components/stagiaire-detail/stagiaire-detail.component';
 import { StagiaireFormComponent } from './stagiaires/components/stagiaire-form/stagiaire-form.component';
 import { StagiaireTableComponent } from './stagiaires/components/stagiaire-table/stagiaire-table.component';
@@ -33,6 +34,28 @@ export class AppRoutingModule {
       canActivate: [
         HasUserGuard
       ]
+    },
+    {
+      path: 'poe',
+      component: PoeWelcomeComponent
+    },
+    // {
+    //   path: 'poe/add',
+    //   component: PoeFormComponent,
+    //   resolve: {form: PoeResolver}
+    // },
+    // {
+    //   path: 'poe/:id',
+    //   component: PoeDetailComponent
+    // },
+    // {
+    //   path: 'poe/update/:id',
+    //   component: PoeFormComponent,
+    //   resolve: {form: PoeResolver}
+    // },
+    {
+      path: 'stagiaire',
+      component: StagiaireTableComponent
     },
     {
       path: 'stagiaire/add',
