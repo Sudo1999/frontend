@@ -1,3 +1,6 @@
+$filter-color: rgb(200, 120, 200);
+$select-color: rgb(95, 55, 230);
+$text-color: rgb(555,255,255);
 div {
     margin: auto;
     width: 75%;
@@ -6,9 +9,10 @@ div {
 button {
     width: 33.33%;
     border-radius: 10px;
-    background-color: rgb(170, 125, 190);
+    background-color: $filter-color;
     &.active {      // On définit une classe active qui sera accessible par button
         font-weight: bold;
-        background-color: rgb(95, 55, 230);
+        background-color: $select-color;
+        color: $text-color;
     }
 }
