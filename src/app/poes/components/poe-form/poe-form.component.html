@@ -1,1 +1,64 @@
-<p>poe-form works!</p>
+<!--<p>poe-form works!</p>-->
+
+<ng-container *ngIf="poeForm">
+    <form [formGroup]="poeForm" (ngSubmit)="onSubmit()">
+
+        <!-- Modèle standard utilisable pour tous les champs :
+        <div>
+            <mat-form-field>
+                <input matInput placeholder="" id="" type="" formControlName="">
+                <mat-error *ngIf="control[''].errors && control[''].touched">
+                    Message d'erreur
+                </mat-error>
+            </mat-form-field>
+        </div> -->
+
+        <div>
+            <mat-form-field>
+                <input matInput placeholder="Intitulé de la POE" id="title" type="text" formControlName="title">
+                <mat-error *ngIf="control['title'].errors && control['title'].touched">
+                    L'intitulé est obligatoire !
+                </mat-error>
+            </mat-form-field>
+        </div>
+
+        <div>
+            <mat-form-field>
+                <input matInput placeholder="Menu déroulant (POEC/ POEI)" id="poeType" type="text" formControlName="poeType">
+                <mat-error *ngIf="control['poeType'].errors && control['poeType'].touched">
+                    Le choix du type de POE est obligatoire !
+                </mat-error>
+            </mat-form-field>
+        </div>
+
+        <div>
+            <mat-form-field>
+                <input matInput id="beginDate" type="Date" formControlName="beginDate">
+                <mat-error *ngIf="control['beginDate'].errors && control['beginDate'].touched">
+                    La date de début est obligatoire !
+                </mat-error>
+            </mat-form-field>
+            <mat-form-field>
+                <input matInput id="endDate" type="Date" formControlName="endDate">
+                <mat-error *ngIf="control['endDate'].errors && control['endDate'].touched">
+                    La date de fin est obligatoire !
+                </mat-error>
+            </mat-form-field>
+        </div>
+
+        <div>
+            <mat-form-field>
+                <input matInput placeholder="Code Aelion" id="idAelion" type="text" formControlName="idAelion">
+            </mat-form-field>
+        </div>
+
+        <p></p>
+        <div>
+            <button mat-raised-button color="primary" [disabled]="!poeForm.valid">
+                {{addMode ? 'Ajouter' : 'Modifier'}}
+            </button>
+            <button mat-raised-button color="danger" type="button" (click)="goList()">Liste</button>
+        </div>
+    </form>
+    <p></p>
+</ng-container>

@@ -45,7 +45,7 @@ export class AppRoutingModule {
     {
       path: 'poe/add',
       component: PoeFormComponent,
-      resolve: {canAcces: PoeResolver}  // canAcces était le premier type de PoeResolver
+      resolve: {form: PoeResolver}  // canAcces était le premier type du Resolver
     },
     // {
     //   path: 'poe/:id',
@@ -54,7 +54,7 @@ export class AppRoutingModule {
     {
       path: 'poe/update/:id',
       component: PoeFormComponent,
-      resolve: {canAcces: PoeResolver}  // canAcces était le premier type de PoeResolver
+      resolve: {form: PoeResolver}  // canAcces était le premier type du Resolver
     },
     {
       path: 'stagiaire',
