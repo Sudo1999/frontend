@@ -48,14 +48,14 @@
     <tfoot>
         <tr>
             <td colspan=4>Nombre d'items</td>
-            <td>
+            <td id="td-number">
                 {{onFilter()}}
             </td>
         </tr>
     </tfoot>
 </table>
 
-<a [routerLink]="['/', 'stagiaire', 'add']">Ajouter</a>
+<a id="a-add" [routerLink]="['/', 'stagiaire', 'add']">Ajouter</a>
 <!-- Le routerLink permet de ne pas recharger mais de passer par un routage interne -->
 
 <!--<app-stagiaire-detail [stagiaire]="selectedStagiaire!" [hidden]="isDetailHidden$ | async"></app-stagiaire-detail>-->

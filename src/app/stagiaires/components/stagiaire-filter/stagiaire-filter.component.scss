@@ -1,9 +1,10 @@
 div {
-    width: max-content;
+    margin: auto;
+    width: 75%;
 }
 
 button {
-    width:250px;
+    width: 33.33%;
     border-radius: 10px;
     background-color: rgb(170, 125, 190);
     &.active {      // On définit une classe active qui sera accessible par button
