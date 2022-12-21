@@ -1,5 +1,6 @@
 $title-backgroud-color: rgb(25,25,200);
 $std-color: rgb(255,255,255);
+$li-color: rgb(255,225,255);
 
 h1 {
     background-color: $title-backgroud-color;
@@ -11,6 +12,7 @@ h1 {
 
 ul {
     list-style-type: none;
+    width: max-content;
     li {
         border: solid 1px $title-backgroud-color;
         border-radius: 0.5em;
@@ -18,5 +20,8 @@ ul {
         &:last-child {
             margin-bottom: 0;   // Distance entre le dernier élément de la liste et l'élément qui suit (ici un bouton)
         }
+        padding-left: 0.5em;
+        padding-right: 0.5em;
+        background-color: $li-color;
     }
 }
