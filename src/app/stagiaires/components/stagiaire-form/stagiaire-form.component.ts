@@ -5,7 +5,7 @@ import { Observable, Subscription } from 'rxjs';
 import { Stagiaire } from 'src/app/core/models/stagiaire';
 import { StagiaireService } from 'src/app/core/services/stagiaire.service';
 import { StagiaireDto } from '../../dto/stagiaire-dto';
-import { FormBuilderService } from '../../services/form-builder.service';
+import { FormBuilderService } from '../../formbuilder/form-builder.service';
 
 @Component({
   selector: 'app-stagiaire-form',

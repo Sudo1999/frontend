@@ -6,7 +6,7 @@ import { Stagiaire } from 'src/app/core/models/stagiaire';
 @Injectable({
   providedIn: 'root'
 })
-export class FormBuilderService {
+export class FormBuilderService {   // FormBuilderService du package stagiaires
 
   private form!: FormGroup;
   private stagiaire: Stagiaire = new Stagiaire();

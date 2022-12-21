@@ -2,8 +2,9 @@ $head-and-foot-color: rgb(25,25,200);
 $head-and-foot-text-color: rgb(255,255,255);
 
 table {
-    border-collapse:collapse;
-    width:750px;
+    margin: auto;
+    border-collapse: collapse;
+    width: 75%;
 }
 thead, tfoot {
     background-color: $head-and-foot-color;
@@ -12,8 +13,9 @@ thead, tfoot {
 thead, tbody {    
     text-align: center;
 }
-/*
-span.special {
-    font-weight: bold;
-    color: red;
-}*/
+#td-number {
+    text-align: center;
+}
+#a-add {
+    margin-left: 12.5%;
+}

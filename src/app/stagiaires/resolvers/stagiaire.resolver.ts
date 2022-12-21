@@ -10,12 +10,13 @@ import { Observable, of } from 'rxjs';
 import { map, take } from 'rxjs/operators';
 import { Stagiaire } from 'src/app/core/models/stagiaire';
 import { StagiaireService } from 'src/app/core/services/stagiaire.service';
-import { FormBuilderService } from '../services/form-builder.service';
+import { FormBuilderService } from '../formbuilder/form-builder.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class StagiaireResolver implements Resolve<FormGroup> {
+  
   public constructor(
     private route: ActivatedRoute,
     private stagiaireService: StagiaireService,
