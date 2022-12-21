@@ -79,10 +79,10 @@ export class StagiaireFormComponent implements OnInit {
         this.stagiaireForm.value
       )
     }
-    subscription.subscribe(() => this.goHome());
+    subscription.subscribe(() => this.goList());
   }
 
-  public goHome(): void {
-    this.router.navigate(['/', 'home']);
+  public goList(): void {
+    this.router.navigate(['/', 'stagiaire']);
   }
 }

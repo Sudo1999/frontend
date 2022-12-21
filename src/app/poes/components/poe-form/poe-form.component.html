@@ -52,5 +52,13 @@
             </mat-form-field>
         </div>
 
+        <p></p>
+        <div>
+            <button mat-raised-button color="primary" [disabled]="!poeForm.valid">
+                {{addMode ? 'Ajouter' : 'Modifier'}}
+            </button>
+            <button mat-raised-button color="danger" type="button" (click)="goList()">Liste</button>
+        </div>
     </form>
+    <p></p>
 </ng-container>

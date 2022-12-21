@@ -67,10 +67,10 @@ export class PoeFormComponent implements OnInit {
       // Invoke service update method
       subscription = this.poeService.update(this.poeForm.value)
     }
-    subscription.subscribe(() => this.goHome());
+    subscription.subscribe(() => this.goList());
   }
 
-  public goHome(): void {
-    this.router.navigate(['/', 'home']);
+  public goList(): void {
+    this.router.navigate(['/', 'poe']);
   }
 }
