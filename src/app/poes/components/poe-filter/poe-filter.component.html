@@ -1,0 +1,23 @@
+<!--<p>poe-filter works!</p>-->
+
+<div>
+    <button type="button" [ngClass]="{'active': getPoeButtonState('btnEnCours')}" (click)="changePoeButtonState('btnEnCours')">
+        En cours
+    </button>
+
+    <button type="button" [ngClass]="{'active': getPoeButtonState('btnUnMois')}" (click)="changePoeButtonState('btnUnMois')">
+        Un mois
+    </button>
+
+    <button type="button" [ngClass]="{'active': getPoeButtonState('btnSixMois')}" (click)="changePoeButtonState('btnSixMois')">
+        Six mois
+    </button>
+
+    <button type="button" [ngClass]="{'active': getPoeButtonState('btnUnAn')}" (click)="changePoeButtonState('btnUnAn')">
+        Un an
+    </button>
+
+    <button type="button" [ngClass]="{'active': getPoeButtonState('btnToutes')}" (click)="changePoeButtonState('btnToutes')">
+        Toutes
+    </button>
+</div>

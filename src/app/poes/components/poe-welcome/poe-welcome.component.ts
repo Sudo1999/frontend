@@ -12,6 +12,7 @@ import { PoeService } from 'src/app/core/services/poe.service';
 export class PoeWelcomeComponent implements OnInit {
 
   public poes: Array<Poe> = [];
+  public filterDate: Date | null = null;
 
   constructor(
     private poeService: PoeService,
@@ -37,8 +38,8 @@ export class PoeWelcomeComponent implements OnInit {
       (obj: Poe) => obj.getId() == poe.getId());
   }
 
-    public onUpdate(poe: Poe): void {
-      this.router.navigate(['/', 'poe', 'update', poe.getId()]);
-      // A chaque virgule correspond un slash dans l'adresse
-    }
+  public onUpdate(poe: Poe): void {
+    this.router.navigate(['/', 'poe', 'update', poe.getId()]);
+    // A chaque virgule correspond un slash dans l'adresse
+  }
 }

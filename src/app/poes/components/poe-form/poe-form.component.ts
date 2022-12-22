@@ -55,7 +55,7 @@ export class PoeFormComponent implements OnInit {
     return this.poeForm.controls;
   }
 
-  public onSubmit() {
+  public onSubmit(): void {
     console.log("Le onSubmit a fonctionné : ");
     console.log(this.poeForm.value);
 

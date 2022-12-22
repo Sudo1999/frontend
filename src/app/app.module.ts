@@ -16,6 +16,7 @@ import { UserModule } from './user/user.module';
 import { AppInitializerService } from './core/services/app-initializer.service';
 import { PoeWelcomeComponent } from './poes/components/poe-welcome/poe-welcome.component';
 import { PoeFormComponent } from './poes/components/poe-form/poe-form.component';
+import { PoeFilterComponent } from './poes/components/poe-filter/poe-filter.component';
 
 // function initializeApp(): Promise<any> {
 //   return new Promise((resolve, reject) => {
@@ -41,7 +42,8 @@ export function initializeApp(appInitService: AppInitializerService) {
     BubbleDirective,
     StagiaireFormComponent,
     PoeWelcomeComponent,
-    PoeFormComponent
+    PoeFormComponent,
+    PoeFilterComponent
   ],
   imports: [
     BrowserModule,
