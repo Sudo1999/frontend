@@ -13,6 +13,11 @@ thead, tfoot {
 thead, tbody {    
     text-align: center;
 }
+tr {
+    height: 2em;
+    // Une valeur exprimée en 'em' est dynamique et fait référence à l'élément parent de l'élément courant.
+    // Ainsi 2em = 2 x la taille de l'élément parent, ou si elle n'est pas définie, la taille par défaut du navigateur.
+}
 #td-number {
     text-align: center;
 }
