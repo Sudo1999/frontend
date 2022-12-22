@@ -44,7 +44,6 @@ export class StagiaireFilterComponent implements OnInit {
           this.buttonMap.set(key, false);
         }
     });
-
     // Now emit the Event...
     if (button === 'btnAll') {
       this.onChangeFilter.emit(null);
