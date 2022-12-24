@@ -8,7 +8,8 @@
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
-    "json": ".\\node_modules\\.bin\\json-server --watch .\\_datas\\db.json"
+    "json": ".\\node_modules\\.bin\\json-server --watch .\\_datas\\db.json",
+    "jsontoday": ".\\node_modules\\.bin\\json-server --watch .\\_datas\\todaydb.json"
   },
   "private": true,
   "dependencies": {
