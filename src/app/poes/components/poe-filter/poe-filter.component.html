@@ -1,6 +1,12 @@
 <!--<p>poe-filter works!</p>-->
 
 <div>
+    <p>
+        Aujourd'hui, 
+        {{todayDate.toLocaleString('fr-fr', {weekday: 'long', day: 'numeric', month:'long', year:'numeric'})}},
+        c'est la fête des ... et des ... , ce qui nous amène à notre Monsieur Madame quotidien :<br>
+        Parmi les événements arrivés à cette date, ...
+    </p>
     <button type="button" [ngClass]="{'active': getPoeButtonState('btnEnCours')}" (click)="changePoeButtonState('btnEnCours')">
         En cours
     </button>

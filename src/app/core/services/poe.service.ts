@@ -1,17 +1,16 @@
 import { HttpClient, HttpResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
-import { map, take } from 'rxjs/operators';
+import { filter, map, take } from 'rxjs/operators';
 import { Poe } from '../models/poe';
 import { PoeDto } from 'src/app/poes/dto/poe-dto';
-import { Observable } from 'rxjs';
+import { from, Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class PoeService {
-
-  private poes: Array<Poe> = [];
+  
   private controllerBaseUrl!: string;
 
   constructor(

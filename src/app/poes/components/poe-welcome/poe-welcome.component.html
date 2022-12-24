@@ -1,7 +1,8 @@
 <!--<p>poe-welcome works!</p>-->
 
-<!--<app-stagiaire-filter [filterDate]="stopDate" (onChangeFilter)="filterChanged($event)"></app-stagiaire-filter>-->
-<app-poe-filter></app-poe-filter>
+<!-- (onPoeFilter) est une information provenant sous la forme @Output() du poe-filter.component.ts, et transmise
+     à la fonction selectPeriod() du poe-welcome.component.ts -->
+<app-poe-filter (onPoeFilter)="selectPeriod($event)"></app-poe-filter>
 <p></p>
 <table>
     <thead>
@@ -12,10 +13,9 @@
             <th>&nbsp;</th>
         </tr>
     </thead>
-
     <tbody>
         <ng-container *ngFor="let poe of poes">
-            <tr>
+            <tr *ngIf="selectPoe(poe)">
                 <td>
                     {{poe.getTitle()}}
                 </td>
@@ -32,6 +32,14 @@
             </tr>
         </ng-container>
     </tbody>
+    <tfoot>
+        <tr>
+            <td colspan=3>Nombre d'items</td>
+            <td id="td-number">
+                {{poeNumber}}
+            </td>
+        </tr>
+    </tfoot>
 </table>
 
 <a id="a-add" [routerLink]="['/', 'poe', 'add']">Ajouter</a>
