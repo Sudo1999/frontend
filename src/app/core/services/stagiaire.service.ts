@@ -11,9 +11,8 @@ import { Stagiaire } from '../models/stagiaire';
 })
 export class StagiaireService {
 
-  private stagiaires: Array<Stagiaire> = [];
-  // Rajouté pour aller chercher l'information dans environment.ts :
-  private controllerBaseUrl!: string;
+  private stagiaires: Array<Stagiaire> = [];  
+  private controllerBaseUrl!: string;   // Rajouté pour aller chercher l'information dans environment.ts
 
   constructor(
     private httpClient: HttpClient  // Le service httpClient contient les méthodes CRUD
