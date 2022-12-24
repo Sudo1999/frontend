@@ -7,8 +7,12 @@ div {
     width: 75%;
 }
 
+p {
+    text-align: center;
+}
+
 button {
-    width: 33.33%;
+    width: 20%;
     border-radius: 10px;
     background-color: $filter-color;
     &.active {      // On définit une classe active qui sera accessible par button

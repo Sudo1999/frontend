@@ -18,7 +18,7 @@
 
     <tbody>
         <ng-container *ngFor="let stagiaire of stagiaires">
-            <tr>
+            <tr *ngIf="changeView(stagiaire)">
                 <td>
                     <span appBubble class="special" [config]="bubbleConfig" (click)="onClick(stagiaire)">
                         <!-- Si initialsOrder = false => les initiales seront à l'envers : -->
