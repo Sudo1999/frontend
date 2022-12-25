@@ -6,9 +6,9 @@ import { AppComponent } from './app.component';
 import { StagiaireTableComponent } from './stagiaires/components/stagiaire-table/stagiaire-table.component';
 import { StagiaireFilterComponent } from './stagiaires/components/stagiaire-filter/stagiaire-filter.component';
 import { StagiaireDetailComponent } from './stagiaires/components/stagiaire-detail/stagiaire-detail.component';
+import { StagiaireFormComponent } from './stagiaires/components/stagiaire-form/stagiaire-form.component';
 import { InitialsPipe } from './shared/pipes/initials.pipe';
 import { BubbleDirective } from './shared/directives/bubble.directive';
-import { StagiaireFormComponent } from './stagiaires/components/stagiaire-form/stagiaire-form.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { SharedModule } from './shared/shared.module';
@@ -17,13 +17,6 @@ import { AppInitializerService } from './core/services/app-initializer.service';
 import { PoeWelcomeComponent } from './poes/components/poe-welcome/poe-welcome.component';
 import { PoeFormComponent } from './poes/components/poe-form/poe-form.component';
 import { PoeFilterComponent } from './poes/components/poe-filter/poe-filter.component';
-
-// function initializeApp(): Promise<any> {
-//   return new Promise((resolve, reject) => {
-//     // Do some asynchronous stuff
-//     //resolve();
-//   });
-// }
 
 export function initializeApp(appInitService: AppInitializerService) {
   return (): Promise<any> => {
@@ -40,7 +33,6 @@ export function initializeApp(appInitService: AppInitializerService) {
     StagiaireFormComponent,
     InitialsPipe,
     BubbleDirective,
-    StagiaireFormComponent,
     PoeWelcomeComponent,
     PoeFormComponent,
     PoeFilterComponent

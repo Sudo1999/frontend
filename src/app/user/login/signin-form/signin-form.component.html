@@ -1,10 +1,10 @@
-<!--<p>login-form works!</p>-->
+<!--<p>signin-form works!</p>-->
 
-<form [formGroup]="loginForm" (ngSubmit)="onLogin()">
+<form [formGroup]="signinForm" (ngSubmit)="onLogin()">
     <div class="field-control">
         <mat-form-field>
             <input matInput formControlName="userLogin" placeholder="Your login...">
-            <mat-error *ngIf="loginForm.get('userLogin')!.errors && loginForm.get('userLogin')!.touched">
+            <mat-error *ngIf="signinForm.get('userLogin')!.errors && signinForm.get('userLogin')!.touched">
                 Your login is required
             </mat-error>
             <!-- Ici le '!' veut dire Required not null -->
@@ -14,7 +14,7 @@
     <div class="field-control">
         <mat-form-field>
             <input matInput formControlName="userPassword" placeholder="Your password..." type="password">
-            <mat-error *ngIf="loginForm.get('userPassword')!.errors && loginForm.get('userPassword')!.touched">
+            <mat-error *ngIf="signinForm.get('userPassword')!.errors && signinForm.get('userPassword')!.touched">
                 Your password is required
             </mat-error>
         </mat-form-field>
@@ -25,6 +25,6 @@
         Stay connected ?
      </div>
      <div class="button">
-         <button mat-raised-button color="primary" [disabled]="loginForm.invalid">Login</button>
+         <button mat-raised-button color="primary" [disabled]="signinForm.invalid">Login</button>
      </div>
 </form>

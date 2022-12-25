@@ -5,13 +5,13 @@ import { Subscription, take } from 'rxjs';
 import { UserService } from '../../services/user.service';
 
 @Component({
-  selector: 'app-login-form',
-  templateUrl: './login-form.component.html',
-  styleUrls: ['./login-form.component.scss']
+  selector: 'app-signin-form',
+  templateUrl: './signin-form.component.html',
+  styleUrls: ['./signin-form.component.scss']
 })
-export class LoginFormComponent implements OnInit, OnDestroy {
+export class SigninFormComponent implements OnInit, OnDestroy {
 
-  public loginForm!: FormGroup;
+  public signinForm!: FormGroup;
   private subscription!: Subscription
 
   constructor(
@@ -21,7 +21,7 @@ export class LoginFormComponent implements OnInit, OnDestroy {
   ) { }
 
   ngOnInit(): void {
-    this.loginForm = this.formBuilder.group({
+    this.signinForm = this.formBuilder.group({
       userLogin: [
         '',
         [
@@ -48,12 +48,12 @@ export class LoginFormComponent implements OnInit, OnDestroy {
 
   public onLogin(): void {
     //this.userService.login(this.loginForm.value)
-    this.subscription = this.userService.login(this.loginForm.value)
+    this.subscription = this.userService.login(this.signinForm.value)
     .subscribe((authenticated: boolean) => {
       if (authenticated) {
         this.router.navigate(['/', 'home']);
       } else {
-        this.loginForm.reset();
+        this.signinForm.reset();
       }
     })
   }

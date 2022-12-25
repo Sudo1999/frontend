@@ -9,7 +9,7 @@ import { StagiaireTableComponent } from './stagiaires/components/stagiaire-table
 import { StagiaireResolver } from './stagiaires/resolvers/stagiaire.resolver';
 import { HasUserGuard } from './user/guards/has-user.guard';
 import { NoUserGuard } from './user/guards/no-user.guard';
-import { LoginFormComponent } from './user/login/login-form/login-form.component';
+import { SigninFormComponent } from './user/login/signin-form/signin-form.component';
 
 @NgModule({
   imports: [RouterModule.forRoot(AppRoutingModule.routes)],
@@ -26,14 +26,14 @@ export class AppRoutingModule {
     },
     {
       path: 'login',
-      component: LoginFormComponent,
+      component: SigninFormComponent,
       canActivate: [
         NoUserGuard
       ]
     },
     {
       path: 'home',
-      component: StagiaireTableComponent,  // A la route 'home' correspond cette adresse
+      component: PoeWelcomeComponent,  // A la route 'home' correspond cette adresse
       // canActivate: [
       //   HasUserGuard
       // ]
