@@ -49,7 +49,7 @@ export class PoeFilterComponent implements OnInit {
     if (this.todayService.getTodayFetes() !== '') {
       return `, on fête ${this.todayService.getTodayFetes()}. `;
     } else {
-      return '';
+      return `. `;
     }
   }
 
