@@ -3,6 +3,7 @@ import { from } from 'rxjs';
 import { filter } from 'rxjs/operators';
 import { Poe } from 'src/app/core/models/poe';
 import { PoeService } from 'src/app/core/services/poe.service';
+import { TodayService } from 'src/app/core/services/today.service';
 
 @Component({
   selector: 'app-poe-filter',
@@ -16,11 +17,13 @@ export class PoeFilterComponent implements OnInit {
 
   @Output() public onPoeFilter: EventEmitter<string | null> = new EventEmitter<string | null>();
   // Cette fonction onPoeFilter() est insérée dans la balise <app-poe-filter> placée dans poe-welcome.component.html
-  constructor() { }
+  constructor(
+    private todayService: TodayService
+  ) { }
 
   ngOnInit(): void {
     this.buttonMap.set('btnEnCours', false);
-    this.buttonMap.set('btnUnMois', true);
+    this.buttonMap.set('btnUnMois', true);  // Pour commencer sur le bouton 'Un mois'
     this.buttonMap.set('btnSixMois', false);
     this.buttonMap.set('btnUnAn', false);
     this.buttonMap.set('btnToutes', false);
@@ -39,6 +42,30 @@ export class PoeFilterComponent implements OnInit {
       } else {
         this.buttonMap.set(key, false);
       }
+    }
+  }
+
+  public getFetes(): string {
+    if (this.todayService.getTodayFetes() !== '') {
+      return `, on fête ${this.todayService.getTodayFetes()}. `;
+    } else {
+      return '';
+    }
+  }
+
+  public getMrMme(): string {
+    if (this.todayService.getTodayMrMme() !== '') {
+      return `Ceci nous amène à notre Monsieur Madame quotidien : ${this.todayService.getTodayMrMme()}. `;
+    } else {
+      return '';
+    }
+  }
+
+  public getCestarrive(): string {
+    if (this.todayService.getTodayCestarrive() !== '') {
+      return `Parmi les événements arrivés à cette date, ${this.todayService.getTodayCestarrive()}.`;
+    } else {
+      return '';
     }
   }
 }
