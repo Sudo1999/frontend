@@ -13,8 +13,6 @@ import { TodayService } from 'src/app/core/services/today.service';
 export class PoeFilterComponent implements OnInit {
 
   public todayDate: Date = new Date();
-  public fetes: string = '';
-  public cestarrive: string = '';
   private buttonMap: Map<string, boolean> = new Map<string, boolean>();
 
   @Output() public onPoeFilter: EventEmitter<string | null> = new EventEmitter<string | null>();
@@ -25,10 +23,10 @@ export class PoeFilterComponent implements OnInit {
 
   ngOnInit(): void {
     this.buttonMap.set('btnEnCours', false);
-    this.buttonMap.set('btnUnMois', false);
+    this.buttonMap.set('btnUnMois', true);  // Pour commencer sur le bouton 'Un mois'
     this.buttonMap.set('btnSixMois', false);
     this.buttonMap.set('btnUnAn', false);
-    this.buttonMap.set('btnToutes', true);
+    this.buttonMap.set('btnToutes', false);
   }
 
   public getPoeButtonState(buttonName: string): boolean {   // C'est le nom du bouton qui sert de clé
@@ -47,18 +45,27 @@ export class PoeFilterComponent implements OnInit {
     }
   }
 
-  public getFetes(): string {   // getFetes est considérée comme une propriété
-    if (this.todayDate.getMonth() === 0) {
-      //return TodayService.getTodayFetes(`01-${this.todayDate.getDate()}`);      
-      //this.fetes = `01-${this.todayDate.getDate()}`;
-      return '';
+  public getFetes(): string {
+    if (this.todayService.getTodayFetes() !== '') {
+      return `, on fête ${this.todayService.getTodayFetes()}. `;
     } else {
-      //return this.fetes = `${this.todayDate.getMonth() + 1}-${this.todayDate.getDate()}`;
-      return this.todayService.getTodayFetes(`${this.todayDate.getMonth() + 1}-${this.todayDate.getDate()}`);
+      return '';
     }
   }
 
-  public getCestarrive(): string {    // getCestarrive est considérée comme une propriété
-    return this.cestarrive = 'yyy';
+  public getMrMme(): string {
+    if (this.todayService.getTodayMrMme() !== '') {
+      return `Ceci nous amène à notre Monsieur Madame quotidien : ${this.todayService.getTodayMrMme()}. `;
+    } else {
+      return '';
+    }
+  }
+
+  public getCestarrive(): string {
+    if (this.todayService.getTodayCestarrive() !== '') {
+      return `Parmi les événements arrivés à cette date, ${this.todayService.getTodayCestarrive()}.`;
+    } else {
+      return '';
+    }
   }
 }

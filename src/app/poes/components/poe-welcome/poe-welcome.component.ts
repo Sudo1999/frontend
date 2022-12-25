@@ -26,8 +26,11 @@ export class PoeWelcomeComponent implements OnInit {
     this.todayDate = new Date();    // Par défaut new Date() prend comme valeur la date courante
     this.poeService.findAll().subscribe((poes: Poe[]) => {
       this.poes = poes;
-      this.poeNumber = this.poes.length;
+      this.poeNumber = this.poes.length;      
+    // Pour commencer sur le bouton 'Un mois' :
+    this.poeNumber = this.poes.filter((poe: Poe) => this.selectPoe(poe)).length;
     });
+    this.selectPeriod('btnUnMois');
   }
 
   public selectPeriod(event: string | null): void {   // Le event qui est passé, c'est le buttonName
@@ -84,7 +87,7 @@ export class PoeWelcomeComponent implements OnInit {
   }
 
   public onPoeNumber(): void {    // onPoeNumber
-    this.poeNumber = this.poes.filter((obj: Poe) => this.selectPoe(obj)).length;
+    this.poeNumber = this.poes.filter((poe: Poe) => this.selectPoe(poe)).length;
   }
 
   public onRemove(poe: Poe): void {

@@ -1,40 +1,63 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import DbJson from '../../../../_datas/db.json';
+
+interface IDays {
+  id: string;
+  fetes: string;
+  mrmme: string;
+  cestarrive: string;
+}
 
 @Injectable({
   providedIn: 'root'
 })
 export class TodayService {
-  
+
   public todayDate: Date = new Date();
   public fetes: string = '';
   public cestarrive: string = '';
+  private dayTab: IDays[] = DbJson.today;
   private accesUrl!: string;
 
   constructor(
     private httpClient: HttpClient
   ) {
+    this.accesUrl = `http://localhost:3000/today/${`${this.todayDate.getMonth()+1}${this.todayDate.getDate()}`}`;
     //this.feedIt();
-    this.accesUrl = `http://localhost:3000/today`;
-   }
+  }
 
   //  private feedIt(): void {
   //  }
 
-   private getOneDay(monthday: string): string {
-    return `http://localhost:3000/today/${monthday}`;
+  public getDayIndice(day: Date): number {
+    const monthday: string = `${day.getMonth()+1}${day.getDate()}`;
+    function getMonthday(element: IDays) {
+      return element.id === monthday;
+    }
+    return this.dayTab.findIndex(getMonthday);
   }
 
-  public getTodayFetes(monthday: string): string {
-    if (this.todayDate.getMonth() === 0) {
-      let todayAdress = '01-' + this.todayDate.getDate();
-      return this.fetes = `${this.getOneDay(todayAdress)}/`;
-    } else {
-      return this.fetes = ` Paramètre ${this.todayDate.getMonth() + 1}-${this.todayDate.getDate()}`;
+  public getTodayIndice(): number {
+    const monthday: string = `${this.todayDate.getMonth()+1}${this.todayDate.getDate()}`;
+    function getMonthday(element: IDays) {
+      return element.id === monthday;
     }
+    return this.dayTab.findIndex(getMonthday);
+  }
+
+  public getTodayFetes(): string {
+    const indice = this.getTodayIndice();
+    return this.fetes = this.dayTab[indice].fetes;
+  }
+
+  public getTodayMrMme(): string {
+    const indice = this.getTodayIndice();
+    return this.fetes = this.dayTab[indice].mrmme;
   }
 
   public getTodayCestarrive(): string {
-    return this.cestarrive = 'yyy';
+    const indice = this.getTodayIndice();
+    return this.fetes = this.dayTab[indice].cestarrive;
   }
 }

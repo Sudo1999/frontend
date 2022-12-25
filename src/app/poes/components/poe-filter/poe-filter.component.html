@@ -3,9 +3,9 @@
 <div>
     <p>
         Aujourd'hui, 
-        {{todayDate.toLocaleString('fr-fr', {weekday: 'long', day: 'numeric', month:'long', year:'numeric'})}},
-        on fête {{getFetes()}}<!-- , ce qui nous amène à notre Monsieur Madame quotidien : -->.<br>
-        Parmi les événements arrivés à cette date, {{getCestarrive()}}.
+        <strong>{{todayDate.toLocaleString('fr-fr', {weekday: 'long', day: 'numeric', month:'long', year:'numeric'})}}</strong>
+        {{getFetes()}}{{getMrMme()}}<br>
+        {{getCestarrive()}}
     </p>
     <button type="button" [ngClass]="{'active': getPoeButtonState('btnEnCours')}" (click)="changePoeButtonState('btnEnCours')">
         En cours
