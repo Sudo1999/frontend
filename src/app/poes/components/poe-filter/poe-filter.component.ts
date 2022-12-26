@@ -23,10 +23,10 @@ export class PoeFilterComponent implements OnInit {
 
   ngOnInit(): void {
     this.buttonMap.set('btnEnCours', false);
-    this.buttonMap.set('btnUnMois', true);  // Pour commencer sur le bouton 'Un mois'
+    this.buttonMap.set('btnUnMois', false);   // Pour commencer sur le bouton 'Un mois' => ('btnUnMois', true);
     this.buttonMap.set('btnSixMois', false);
     this.buttonMap.set('btnUnAn', false);
-    this.buttonMap.set('btnToutes', false);
+    this.buttonMap.set('btnToutes', true);
   }
 
   public getPoeButtonState(buttonName: string): boolean {   // C'est le nom du bouton qui sert de clé

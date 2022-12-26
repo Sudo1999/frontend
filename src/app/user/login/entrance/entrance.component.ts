@@ -24,11 +24,11 @@ export class EntranceComponent implements OnInit {  // L'utilisateur arrive à c
   ) { }
 
   ngOnInit(): void {
-    
+
 		this.isSignedin = this.authService.isUserSignedin();
 		this.signedinUser = this.authService.getSignedinUser();
 
-		if(!this.authService.isUserSignedin()) {    // On n'accède jamais à la page 'entrance' si l'on n'est pas authentifié
+		if(!this.isSignedin) {    // On n'accède jamais à la page si l'on n'est pas authentifié
 			this.router.navigateByUrl('signin');
 		}
 

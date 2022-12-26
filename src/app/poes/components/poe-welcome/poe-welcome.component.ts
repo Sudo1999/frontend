@@ -26,11 +26,11 @@ export class PoeWelcomeComponent implements OnInit {
     this.todayDate = new Date();    // Par défaut new Date() prend comme valeur la date courante
     this.poeService.findAll().subscribe((poes: Poe[]) => {
       this.poes = poes;
-      this.poeNumber = this.poes.length;      
-    // Pour commencer sur le bouton 'Un mois' :
-    this.poeNumber = this.poes.filter((poe: Poe) => this.selectPoe(poe)).length;
+      this.poeNumber = this.poes.length;
+      // Pour commencer sur le bouton 'Un mois' :
+      //this.poeNumber = this.poes.filter((poe: Poe) => this.selectPoe(poe)).length;
     });
-    this.selectPeriod('btnUnMois');
+    //this.selectPeriod('btnUnMois');
   }
 
   public selectPeriod(event: string | null): void {   // Le event qui est passé, c'est le buttonName
@@ -87,6 +87,7 @@ export class PoeWelcomeComponent implements OnInit {
   }
 
   public onPoeNumber(): void {    // onPoeNumber
+    console.log('onPoeNumber a été appelé et poeNumber = ' + this.poeNumber);
     this.poeNumber = this.poes.filter((poe: Poe) => this.selectPoe(poe)).length;
   }
 
@@ -96,11 +97,11 @@ export class PoeWelcomeComponent implements OnInit {
       .subscribe({
         next: (response: HttpResponse<any>) => {
           this.poes.splice(
-            this.poes.findIndex((p: Poe) => p.getId() === poe.getId()), 1)
+            this.poes.findIndex((obj: Poe) => obj.getId() === poe.getId()), 1
+          )
         }
       });
-    const poeIndex: number = this.poes.findIndex(
-      (obj: Poe) => obj.getId() == poe.getId());
+      this.poeNumber = this.poeNumber - 1;
   }
 
   public onUpdate(poe: Poe): void {

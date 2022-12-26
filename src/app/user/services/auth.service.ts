@@ -7,7 +7,7 @@ import { RequestDto } from '../dto/request-dto';
 @Injectable({
   providedIn: 'root'
 })
-export class AuthService {    // Ce service remplace le UserService de la précédente implémentation
+export class AuthService {    // Ce AuthService remplace le UserService de la précédente implémentation
 
   private baseUrl = 'http://localhost:8080/';   // The base URL is the backend REST API’s base URL
 
