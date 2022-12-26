@@ -9,7 +9,9 @@ import { StagiaireTableComponent } from './stagiaires/components/stagiaire-table
 import { StagiaireResolver } from './stagiaires/resolvers/stagiaire.resolver';
 import { HasUserGuard } from './user/guards/has-user.guard';
 import { NoUserGuard } from './user/guards/no-user.guard';
-import { LoginFormComponent } from './user/login/login-form/login-form.component';
+import { EntranceComponent } from './user/login/entrance/entrance.component';
+import { SigninFormComponent } from './user/login/signin/signin-form.component';
+import { SignupFormComponent } from './user/login/signup/signup-form.component';
 
 @NgModule({
   imports: [RouterModule.forRoot(AppRoutingModule.routes)],
@@ -25,18 +27,34 @@ export class AppRoutingModule {
       pathMatch: 'full'   // Important pour que toute l'adresse soit lue
     },
     {
-      path: 'login',
-      component: LoginFormComponent,
+      path: 'home',
+      component: EntranceComponent
+      //component: PoeWelcomeComponent,  // A la route 'home' correspond cette adresse
+    },
+    {
+      path: 'entrance',
+      component: EntranceComponent
+    },
+    // {
+    //   path: 'login',
+    //   component: SigninFormComponent,
+    //   canActivate: [
+    //     NoUserGuard
+    //   ]
+    // },
+    {
+      path: 'signup',
+      component: SignupFormComponent,
       canActivate: [
         NoUserGuard
       ]
     },
     {
-      path: 'home',
-      component: StagiaireTableComponent,  // A la route 'home' correspond cette adresse
-      // canActivate: [
-      //   HasUserGuard
-      // ]
+      path: 'signin',
+      component: SigninFormComponent,
+      canActivate: [
+        NoUserGuard
+      ]
     },
     {
       path: 'poe',
@@ -58,30 +76,33 @@ export class AppRoutingModule {
     },
     {
       path: 'stagiaire',
-      component: StagiaireTableComponent
+      component: StagiaireTableComponent,
+      canActivate: [
+        HasUserGuard
+      ]
     },
     {
       path: 'stagiaire/add',
       component: StagiaireFormComponent,
       resolve: {form: StagiaireResolver},
-      // canActivate: [
-      //   HasUserGuard
-      // ]
+      canActivate: [
+        HasUserGuard
+      ]
     },
     {
       path: 'stagiaire/:id',    // Paramètre de la route => le ":"
       component: StagiaireDetailComponent,
-      // canActivate: [
-      //   HasUserGuard
-      // ]
+      canActivate: [
+        HasUserGuard
+      ]
     },
     {
       path: 'stagiaire/update/:id',   // Paramètre de la route => le ":"
       component: StagiaireFormComponent,
       resolve: {form: StagiaireResolver},
-      // canActivate: [
-      //   HasUserGuard
-      // ]
+      canActivate: [
+        HasUserGuard
+      ]
     },
     {
       path: '**',   // Wild card : Impérativement la dernière route du routeur

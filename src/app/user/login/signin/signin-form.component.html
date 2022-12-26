@@ -1,0 +1,54 @@
+<!--<p>signin-form works!</p>-->
+
+<div id="signin-box">
+	<h2>Signin Here</h2>
+	<div style="color : red" *ngIf='error'>{{error}}</div>
+	<form name='signinForm' (submit)="doSignin()">
+		<table>
+			<tr>
+				<td>Username:</td>
+				<td><input type='text' name='userName' [(ngModel)]="userName"></td>
+			</tr>
+			<tr>
+				<td>Password:</td>
+				<td><input type='password' name='userPass' [(ngModel)]="userPass"/></td>
+			</tr>            
+            <tr>&nbsp;</tr>
+			<tr>
+				<td><input name="submit" type="submit" value="Signin" /></td>
+				<td>Don't have account ? <a href="/signup" routerLink="/signup">Signup</a></td>
+			</tr>
+		</table>
+	</form>
+</div>
+
+<!--<form [formGroup]="signinForm" (ngSubmit)="doLogin()">
+    <div class="field-control">
+        <mat-form-field>
+            <input matInput formControlName="userLogin" placeholder="Your login...">
+            <mat-error *ngIf="signinForm.get('userLogin')!.errors && signinForm.get('userLogin')!.touched">
+                Your login is required
+            </mat-error>
+        </mat-form-field>
+    </div>
+
+    <div class="field-control">
+        <mat-form-field>
+            <input matInput formControlName="userPassword" placeholder="Your password..." type="password">
+            <mat-error *ngIf="signinForm.get('userPassword')!.errors && signinForm.get('userPassword')!.touched">
+                Your password is required
+            </mat-error>
+        </mat-form-field>
+    </div>
+
+    <div class="field-control">
+        <mat-slide-toggle formControlName="stayConnected"></mat-slide-toggle>
+        Stay connected ?
+    </div>
+    <div class="button">
+        <button mat-raised-button color="primary" [disabled]="signinForm.invalid">Signin</button>
+    </div>
+    <div>
+        Don't have account ? <a href="/signup" routerLink="/signup">Signup</a>
+    </div>
+</form>-->
