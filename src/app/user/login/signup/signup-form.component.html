@@ -7,15 +7,15 @@
     <form name='signupForm' (submit)="doSignup()">
         <table>
             <tr>
-                <td>Username:</td>
+                <td>Username</td>
                 <td><input type='text' name='userName' [(ngModel)]="userName"></td>
             </tr>
             <tr>
-                <td>Password:</td>
+                <td>Password</td>
                 <td><input type='password' name='userPass' [(ngModel)]="userPass" /></td>
             </tr>
             <tr>
-                <td>Roles:</td>
+                <td>Roles</td>
                 <td>
                     <div *ngFor="let role of roles">
                         <input [(ngModel)]="role.selected" name="{{role.name}}" type="checkbox" id="{{role.name}}"

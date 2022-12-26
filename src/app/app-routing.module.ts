@@ -28,20 +28,8 @@ export class AppRoutingModule {
     },
     {
       path: 'home',
-      component: EntranceComponent
-      //component: PoeWelcomeComponent,  // A la route 'home' correspond cette adresse
+      component: PoeWelcomeComponent
     },
-    {
-      path: 'entrance',
-      component: EntranceComponent
-    },
-    // {
-    //   path: 'login',
-    //   component: SigninFormComponent,
-    //   canActivate: [
-    //     NoUserGuard
-    //   ]
-    // },
     {
       path: 'signup',
       component: SignupFormComponent,
@@ -52,6 +40,13 @@ export class AppRoutingModule {
     {
       path: 'signin',
       component: SigninFormComponent,
+      canActivate: [
+        NoUserGuard
+      ]
+    },
+    {
+      path: 'entrance',
+      component: EntranceComponent,
       canActivate: [
         NoUserGuard
       ]
@@ -77,32 +72,32 @@ export class AppRoutingModule {
     {
       path: 'stagiaire',
       component: StagiaireTableComponent,
-      canActivate: [
-        HasUserGuard
-      ]
+      // canActivate: [
+      //   HasUserGuard
+      // ]
     },
     {
       path: 'stagiaire/add',
       component: StagiaireFormComponent,
       resolve: {form: StagiaireResolver},
-      canActivate: [
-        HasUserGuard
-      ]
+      // canActivate: [
+      //   HasUserGuard
+      // ]
     },
     {
       path: 'stagiaire/:id',    // Paramètre de la route => le ":"
       component: StagiaireDetailComponent,
-      canActivate: [
-        HasUserGuard
-      ]
+      // canActivate: [
+      //   HasUserGuard
+      // ]
     },
     {
       path: 'stagiaire/update/:id',   // Paramètre de la route => le ":"
       component: StagiaireFormComponent,
       resolve: {form: StagiaireResolver},
-      canActivate: [
-        HasUserGuard
-      ]
+      // canActivate: [
+      //   HasUserGuard
+      // ]
     },
     {
       path: '**',   // Wild card : Impérativement la dernière route du routeur

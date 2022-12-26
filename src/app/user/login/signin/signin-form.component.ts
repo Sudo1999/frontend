@@ -15,9 +15,9 @@ export class SigninFormComponent implements OnInit, OnDestroy {
 
   public signinForm!: FormGroup;
   public subscription!: Subscription;
-  public isSignedin!: boolean;   // Correspond au isUserSignedin() du authService
-  public userName: string = '';    // Correspond au userName de RequestDto
-	public userPass : string = '';   // Correspond au userPass de RequestDto
+  public isSignedin!: boolean;      // Correspond au isUserSignedin() du authService
+  public userName: string = '';     // Correspond au userName de RequestDto
+	public userPass : string = '';    // Correspond au userPass de RequestDto
   public error: string = '';
 
   constructor(
@@ -76,7 +76,7 @@ export class SigninFormComponent implements OnInit, OnDestroy {
 
 			const request: RequestDto = { userName: this.userName, userPass: this.userPass};
 			this.authService.signin(request).subscribe((result)=> {
-				this.router.navigateByUrl('home');
+				this.router.navigateByUrl('entrance');
 			}, () => {
 				this.error = 'Either invalid credentials or something went wrong';
 			});
