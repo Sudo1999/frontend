@@ -1,0 +1,36 @@
+<!--<p>signup-form works!</p>-->
+
+<div id="signup-box">
+    <h2>Signup Here</h2>
+    <div style="color : red" *ngIf='error'>{{error}}</div>
+    <div style="color : green" *ngIf='success'>{{success}}</div>
+    <form name='signupForm' (submit)="doSignup()">
+        <table>
+            <tr>
+                <td>Username:</td>
+                <td><input type='text' name='userName' [(ngModel)]="userName"></td>
+            </tr>
+            <tr>
+                <td>Password:</td>
+                <td><input type='password' name='userPass' [(ngModel)]="userPass" /></td>
+            </tr>
+            <tr>
+                <td>Roles:</td>
+                <td>
+                    <div *ngFor="let role of roles">
+                        <input [(ngModel)]="role.selected" name="{{role.name}}" type="checkbox" id="{{role.name}}"
+                            (change)="onChangeCategory($event, role)">
+                        <label class="form-check-label" for="{{role.name}}">
+                            {{role.name}}
+                        </label>
+                    </div>
+                </td>
+            </tr>
+            <tr>&nbsp;</tr>
+            <tr>
+                <td><input name="submit" type="submit" value="Signup" /></td>
+                <td>Have account ? <a href="/signin" routerLink="/signin">Signin</a></td>
+            </tr>
+        </table>
+    </form>
+</div>

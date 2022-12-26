@@ -25,7 +25,7 @@ const users: UserDto[] = [
 @Injectable({
   providedIn: 'root'
 })
-export class UserService {
+export class UserService {    // Ce service est remplacé par le AuthService dans la nouvelle implémentation
 
   private _user: User | null = null;
   public hasUser$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
