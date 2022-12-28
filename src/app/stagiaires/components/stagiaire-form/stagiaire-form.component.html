@@ -52,7 +52,7 @@
 
         <p></p>
         <div>
-            <!-- Exercice du Datepicker (Ajouter 'CUSTOM_ELEMENTS_SCHEMA' au '@NgModule.schemas' ?) : -->
+            <!-- Exercice du Datepicker (Ajouter 'CUSTOM_ELEMENTS_SCHEMA' au '@NgModule.schemas' ?) -->
             <mat-form-field appearance="fill">
                 <mat-label>Birthdate</mat-label>
                 <input matInput [matDatepicker]="dp" formControlName="birthDate">
@@ -64,9 +64,9 @@
 
         <p></p>
         <div>
-            <!--<button mat-raised-button color="primary" [disabled]="!stagiaireForm.valid">Ajouter un stagiaire</button>-->
-            <button mat-raised-button color="primary" [disabled]="!stagiaireForm.valid">{{addMode ? 'Ajouter' :
-                'Modifier'}}</button>
+            <button mat-raised-button color="primary" [disabled]="!stagiaireForm.valid">
+                {{addMode ? 'Ajouter' : 'Modifier'}}
+            </button>
             <button mat-raised-button color="danger" type="button" (click)="goList()">Liste</button>
         </div>
     </form>

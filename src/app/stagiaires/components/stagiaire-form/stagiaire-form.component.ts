@@ -40,8 +40,7 @@ export class StagiaireFormComponent implements OnInit {
           console.log('Mode update');
           this.addMode = false;
           // On récupère le id du stagiaire :
-          //this.stagiaireService.findOne(parseInt(url[url.length - 1].path));
-          this.stagiaireService.findOne(+url[url.length - 1].path) // Le + remplace le parseInt (c'est un raccourci)
+          this.stagiaireService.findOne(+url[url.length - 1].path) // +url est un raccourci de parseInt(url)
             .subscribe((stagiaire: Stagiaire) => {
               console.log(`Got ${stagiaire.getId()} ready to update`);
               this.stagiaireForm = this.formBuilderService.build(stagiaire).getForm();
@@ -51,8 +50,6 @@ export class StagiaireFormComponent implements OnInit {
         }
       });
   }
-
-  // Méthode "helper"
 
   /**
    * Returns a list of form controls
@@ -64,14 +61,13 @@ export class StagiaireFormComponent implements OnInit {
   }
 
   onSubmit() {
-    // TODO: Use EventEmitter with form value
-    console.log("Le onSubmit a fonctionné : ");
-    console.log(this.stagiaireForm.value);
+    console.log("Le onSubmit a fonctionné.");
     console.log("Delegate add stagiaire:", this.stagiaireForm.value);
     const dto: StagiaireDto = new StagiaireDto(this.stagiaireForm.value);
 
     let subscription: Observable<any>;
     if (this.addMode) {
+      // Invoke service add method
       subscription = this.stagiaireService.add(dto);
     } else {
       // Invoke service update method

@@ -16,7 +16,7 @@
         <div>
             <mat-form-field>
                 <input matInput placeholder="Intitulé de la POE" id="title" type="text" formControlName="title">
-                <mat-error *ngIf="control['title'].errors && control['title'].touched">
+                <mat-error *ngIf="c['title'].errors && c['title'].touched">
                     L'intitulé est obligatoire !
                 </mat-error>
             </mat-form-field>
@@ -25,7 +25,7 @@
         <div>
             <mat-form-field>
                 <input matInput placeholder="Menu déroulant (POEC/ POEI)" id="poeType" type="text" formControlName="poeType">
-                <mat-error *ngIf="control['poeType'].errors && control['poeType'].touched">
+                <mat-error *ngIf="c['poeType'].errors && c['poeType'].touched">
                     Le choix du type de POE est obligatoire !
                 </mat-error>
             </mat-form-field>
@@ -34,13 +34,13 @@
         <div>
             <mat-form-field>
                 <input matInput id="beginDate" type="Date" formControlName="beginDate">
-                <mat-error *ngIf="control['beginDate'].errors && control['beginDate'].touched">
+                <mat-error *ngIf="c['beginDate'].errors && c['beginDate'].touched">
                     La date de début est obligatoire !
                 </mat-error>
             </mat-form-field>
             <mat-form-field>
                 <input matInput id="endDate" type="Date" formControlName="endDate">
-                <mat-error *ngIf="control['endDate'].errors && control['endDate'].touched">
+                <mat-error *ngIf="c['endDate'].errors && c['endDate'].touched">
                     La date de fin est obligatoire !
                 </mat-error>
             </mat-form-field>

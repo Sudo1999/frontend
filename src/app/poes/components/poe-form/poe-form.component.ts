@@ -51,7 +51,8 @@ export class PoeFormComponent implements OnInit {
       });
   }
 
-  public get control(): { [key: string]: AbstractControl } {
+  // Usage => c['title'] instead of poeForm.controls['title'] in the form
+  public get c(): { [key: string]: AbstractControl } {
     return this.poeForm.controls;
   }
 
@@ -64,7 +65,6 @@ export class PoeFormComponent implements OnInit {
     if (this.addMode) {
       subscription = this.poeService.add(poeDto);
     } else {
-      // Invoke service update method
       subscription = this.poeService.update(this.poeForm.value)
     }
     subscription.subscribe(() => this.goList());
