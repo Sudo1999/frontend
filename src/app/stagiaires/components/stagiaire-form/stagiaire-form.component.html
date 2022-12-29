@@ -6,7 +6,7 @@
             <mat-form-field>
                 <input matInput placeholder="Nom du stagiaire..." id="lastName" type="text" formControlName="lastName">
                 <mat-error *ngIf="c['lastName'].errors && c['lastName'].touched">
-                    Le nom du stagiaire est obligatoire !
+                    Le nom du stagiaire est obligatoire
                 </mat-error>
             </mat-form-field>
         </div>
@@ -16,7 +16,7 @@
                 <input matInput placeholder="Prénom du stagiaire..." id="firstName" type="text"
                     formControlName="firstName">
                 <mat-error *ngIf="c['firstName'].errors && c['firstName'].touched">
-                    Le prénom du stagiaire est obligatoire !
+                    Le prénom du stagiaire est obligatoire
                 </mat-error>
             </mat-form-field>
         </div>
@@ -26,10 +26,10 @@
                 <input matInput placeholder="Email du stagiaire..." id="email" type="email" formControlName="email">
                 <mat-error *ngIf="c['email'].errors && c['email'].touched">
                     <span *ngIf="c['email'].hasError('required')">
-                        L'email est obligatoire
+                        L'adresse mail est obligatoire
                     </span>
                     <span *ngIf="c['email'].hasError('email')">
-                        L'adresse saisie n'est pas une adresse valide...
+                        L'adresse saisie n'est pas valide...
                     </span>
                 </mat-error>
             </mat-form-field>
@@ -52,13 +52,16 @@
 
         <p></p>
         <div>
-            <!-- Exercice du Datepicker (Ajouter 'CUSTOM_ELEMENTS_SCHEMA' au '@NgModule.schemas' ?) -->
+            <!-- Exercice du Datepicker -->
             <mat-form-field appearance="fill">
-                <mat-label>Birthdate</mat-label>
+                <mat-label>Date de naissance</mat-label>
                 <input matInput [matDatepicker]="dp" formControlName="birthDate">
                 <mat-hint>JJ-MM-YYYY</mat-hint>
                 <mat-datepicker-toggle matIconSuffix [for]="dp"></mat-datepicker-toggle>
                 <mat-datepicker #dp></mat-datepicker>
+                <mat-error *ngIf="c['birthDate'].errors && c['birthDate'].touched">
+                    La date de naissance est obligatoire
+                </mat-error>
             </mat-form-field>
         </div>
 

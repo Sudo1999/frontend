@@ -16,6 +16,7 @@ export class PoeFormComponent implements OnInit {
 
   public poeForm!: FormGroup;
   public addMode: boolean = true;
+  public errorMsg: string = "La date de fin doit être postérieure à la date de début";
 
   constructor(
     private router: Router,
@@ -27,7 +28,6 @@ export class PoeFormComponent implements OnInit {
   ngOnInit(): void {
     const data: any = this.route.snapshot.data;
     this.poeForm = data.form;
-    console.log(`${data}`);
     console.log(`${this.poeForm instanceof FormGroup ? 'poeForm OK' : 'poeForm KO'}`);
 
     this.route.url    // Observable

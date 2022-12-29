@@ -2,6 +2,7 @@ import { Inject, Injectable } from '@angular/core';
 import { AbstractControl, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { DateAdapter, MAT_DATE_LOCALE } from '@angular/material/core';
 import { Poe } from 'src/app/core/models/poe';
+import { DateValidator } from './date-validator';
 
 @Injectable({
   providedIn: 'root'
@@ -46,22 +47,26 @@ export class FormBuilderService {   // FormBuilderService du package poes
         ]
       ],
       beginDate: [
-        this.poe.getBeginDate(),
+        this.poe.getBeginDate() !== null ? this.poe.getBeginDate() : '',
         [
-          Validators.required
+          Validators.required,
           //Validators ? => La date de début de la POE ne peut être supérieure à la date de fin.
         ]
       ],
       endDate: [
-        this.poe.getEndDate(),
+        this.poe.getEndDate() !== null ? this.poe.getEndDate() : '',
         [
-          Validators.required
+          Validators.required,
+          DateValidator.dateOrderValidator    // Le message d'erreur ne fonctionne pas
           //Validators ? => La date de début de la POE ne peut être supérieure à la date de fin.
         ]
       ],
       idAelion: [
         this.poe.getIdAelion()
       ]
+    },
+    {
+      validator: DateValidator.dateOrderValidator
     });
     
     if (this.updateMode) {
