@@ -37,7 +37,7 @@ export class StagiaireDetailComponent implements OnInit {
   }
   
   public onClose(): void {
-    this.router.navigate(['/', 'home']);
+    this.router.navigate(['/', 'stagiaire']);
   }
 
   public ouvrePopUp() {

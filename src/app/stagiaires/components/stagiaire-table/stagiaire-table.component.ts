@@ -15,7 +15,8 @@ import { HandleDetailService } from 'src/app/shared/directives/handle-detail.ser
 export class StagiaireTableComponent implements OnInit {
 
   public stagiaires: Array<Stagiaire> = []; // On le rajoute après avoir modifié le constructeur
-  public stopDate: Date | null = new Date(1950, 11, 31);   // On le rajoute pour introduire la condition dans le html
+  //public stopDate: Date | null = new Date(1950, 11, 31);   // On le rajoute pour introduire la condition dans le html
+  public stopDate: Date | null = null;
   public selectedStagiaire: Stagiaire | null = null;
   public isDetailHidden$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(true);
   
