@@ -37,6 +37,8 @@ export class EntranceComponent implements OnInit {  // L'utilisateur arrive à c
         (result: string) => this.greeting.push(result), () => console.log('/user - You are not authorized'));
 			this.greetingService.getByAdminRole().subscribe(
         (result: string) => this.greeting.push(result), () => console.log('/admin - You are not authorized'));
+			// this.greetingService.getByUserOrAdminRole().subscribe(
+      //   (result: string) => this.greeting.push(result), () => console.log('/userOrAdmin - You are not authorized'));
 			this.greetingService.getByAnonymousRole().subscribe(
         (result: string) => this.greeting.push(result), () => console.log('/anonymous - You are not authorized'));
 		}
