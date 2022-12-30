@@ -15,8 +15,8 @@ import { FormBuilderService } from '../../formbuilder/form-builder.service';
 export class PoeFormComponent implements OnInit {
 
   public poeForm!: FormGroup;
+  public poeTypes: string[] = [];
   public addMode: boolean = true;
-  public errorMsg: string = "La date de fin doit être postérieure à la date de début";
 
   constructor(
     private router: Router,

@@ -3,16 +3,6 @@
 <ng-container *ngIf="poeForm">
     <form [formGroup]="poeForm" (ngSubmit)="onSubmit()">
 
-        <!-- Modèle standard utilisable pour tous les champs :
-        <div>
-            <mat-form-field>
-                <input matInput placeholder="" id="" type="" formControlName="">
-                <mat-error *ngIf="control[''].errors && control[''].touched">
-                    Message d'erreur
-                </mat-error>
-            </mat-form-field>
-        </div> -->
-
         <div>
             <mat-form-field>
                 <input matInput placeholder="Intitulé de la POE" id="title" type="text" formControlName="title">
@@ -23,11 +13,8 @@
         </div>
 
         <div>
-            <mat-form-field>
-
-                <!-- <select ng-model="selectedType" ng-options="poeType for poeType in PoeType"></select> -->                
-                <!--<dropdown placeholder="poeType" list="poeType" selected="" property="poeType"></dropdown>-->
-
+            <mat-form-field appearance="fill">
+                <mat-label>Catégorie de POE</mat-label>
                 <input matInput placeholder="Menu déroulant (POEC/ POEI)" id="poeType" type="text"
                     formControlName="poeType">
                 <mat-error *ngIf="c['poeType'].errors && c['poeType'].touched">
@@ -59,13 +46,11 @@
                     <span *ngIf="c['endDate'].hasError('required')">
                         La date de fin est obligatoire
                     </span>
-                    <span *ngIf="c['endDate'].hasError('invalidEndDate')">  <!-- Le message d'erreur ne fonctionne pas -->
-                        La date de fin doit être postérieure à la date de début
-                    </span>
                 </mat-error>
-            </mat-form-field>   <!-- Solution bricolée faute d'affichage du message standard -->
-            <mat-error id="errorMsg" *ngIf="c['beginDate'].touched && c['endDate'].touched && !poeForm.valid">
-                {{errorMsg}}
+            </mat-form-field>
+            <mat-error id="errorMsg" *ngIf="c['beginDate'].touched && c['endDate'].touched 
+                && c['beginDate'].value !== null && c['endDate'].value !== null && c['beginDate'].value > c['endDate'].value">
+                {{"La date de fin doit être postérieure à la date de début"}}
             </mat-error>
         </div>
 

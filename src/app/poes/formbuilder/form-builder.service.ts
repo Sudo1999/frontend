@@ -57,7 +57,7 @@ export class FormBuilderService {   // FormBuilderService du package poes
         this.poe.getEndDate() !== null ? this.poe.getEndDate() : '',
         [
           Validators.required,
-          DateValidator.dateOrderValidator    // Le message d'erreur ne fonctionne pas
+          DateValidator.dateOrderValidator    // La validation fonctionne mais pas le message d'erreur
           //Validators ? => La date de début de la POE ne peut être supérieure à la date de fin.
         ]
       ],
