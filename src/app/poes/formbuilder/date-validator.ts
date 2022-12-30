@@ -6,18 +6,21 @@ import { AbstractControl, ValidationErrors } from "@angular/forms";
 })
 export class DateValidator {
 
-    constructor() { }
+    private static begin: Date;
+    private static end: Date;
+
+    constructor() {}
 
     public static dateOrderValidator(control: AbstractControl): ValidationErrors | null {
 
         if (control.get('beginDate') !== null && control.get('endDate') !== null) {
 
-            // Comparaison des champs
-            const begin = control.get('beginDate')!.value;
-            const end = control.get('endDate')!.value;
+            // Comparaison des champs            
+            DateValidator.begin = control.get('beginDate')!.value;
+            DateValidator.end = control.get('endDate')!.value;
 
-            if (begin !== null && end !== null) {
-                const isValid = begin.isBefore(end);
+            if (DateValidator.begin !== null && DateValidator.end !== null) {
+                const isValid = DateValidator.begin < DateValidator.end;
 
                 // Invalide
                 if (!isValid) {

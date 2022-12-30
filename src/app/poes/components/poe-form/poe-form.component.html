@@ -24,8 +24,10 @@
 
         <div>
             <mat-form-field>
-                <!--https://www.delftstack.com/fr/howto/angular/angular-js-dropdown-->
+
+                <!-- <select ng-model="selectedType" ng-options="poeType for poeType in PoeType"></select> -->                
                 <!--<dropdown placeholder="poeType" list="poeType" selected="" property="poeType"></dropdown>-->
+
                 <input matInput placeholder="Menu déroulant (POEC/ POEI)" id="poeType" type="text"
                     formControlName="poeType">
                 <mat-error *ngIf="c['poeType'].errors && c['poeType'].touched">
@@ -61,7 +63,7 @@
                         La date de fin doit être postérieure à la date de début
                     </span>
                 </mat-error>
-            </mat-form-field>   <!-- Solution bricolée faute de mieux -->
+            </mat-form-field>   <!-- Solution bricolée faute d'affichage du message standard -->
             <mat-error id="errorMsg" *ngIf="c['beginDate'].touched && c['endDate'].touched && !poeForm.valid">
                 {{errorMsg}}
             </mat-error>
