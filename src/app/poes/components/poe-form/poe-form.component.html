@@ -15,8 +15,14 @@
         <div>
             <mat-form-field appearance="fill">
                 <mat-label>Catégorie de POE</mat-label>
-                <input matInput placeholder="Menu déroulant (POEC/ POEI)" id="poeType" type="text"
-                    formControlName="poeType">
+                <mat-select>
+                    <!-- <mat-option *ngFor="let poeType of poeTypes" [value]="poeType.valueOf"> -->
+                    <mat-option *ngFor="let poeType of poeTypes">
+                        {{poeType}}
+                    </mat-option>
+                </mat-select>
+                <!-- <input matInput placeholder="Menu déroulant (POEC/ POEI)" id="poeType" type="text"
+                    formControlName="poeType"> -->
                 <mat-error *ngIf="c['poeType'].errors && c['poeType'].touched">
                     <span *ngIf="c['poeType'].hasError('required')">
                         Le choix est obligatoire

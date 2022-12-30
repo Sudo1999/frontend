@@ -49,6 +49,7 @@ export class PoeFormComponent implements OnInit {
           console.log('Mode add');
         }
       });
+    //this.poeService.getAllPoeTypes().forEach(item => this.poeTypes.push(item));
   }
 
   // Usage => c['title'] instead of poeForm.controls['title'] in the form

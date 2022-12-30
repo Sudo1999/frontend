@@ -93,4 +93,19 @@ export class PoeService {
     return this.httpClient.delete(`${this.controllerBaseUrl}/${poe.getId()}`,
       { observe: 'response' });
   }
+
+  public getAllPoeTypes(): Observable<Set<Poe['poeType']>> {
+    return this.httpClient.get<any>(this.controllerBaseUrl)
+      .pipe(
+        take(1),
+        map((poes: Set<any>) => {
+          return poes.add((inputPoe: any) => {
+            const poe: Poe = new Poe();
+            poe.setPoeType(inputPoe.poeType);
+            console.log(poe['poeType']);            
+            return poe['poeType'];
+          })
+        })
+      );
+  }
 }
