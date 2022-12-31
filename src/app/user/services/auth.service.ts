@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Observable, map } from 'rxjs';
 import { RequestDto } from '../dto/request-dto';
+import { UserService } from './user.service';
 
 @Injectable({
   providedIn: 'root'
@@ -10,6 +11,7 @@ import { RequestDto } from '../dto/request-dto';
 export class AuthService {    // Ce AuthService remplace le UserService de la précédente implémentation
 
   private baseUrl = 'http://localhost:8080/';   // The base URL is the backend REST API’s base URL
+  public canActivate!: boolean;    // Essai d'aménagement pour pouvoir utiliser le guard
 
   constructor(
     private route: ActivatedRoute,
@@ -37,6 +39,8 @@ export class AuthService {    // Ce AuthService remplace le UserService de la pr
         sessionStorage.setItem('user', request.userName);
         //sessionStorage.setItem('token', 'HTTP_TOKEN ' + response.token);
         sessionStorage.setItem('token', 'Bearer ' + response.token);
+        // Essai d'aménagement pour pouvoir utiliser le guard :
+        //this.canActivate = true;
         return response;
       })
     );
@@ -45,6 +49,8 @@ export class AuthService {    // Ce AuthService remplace le UserService de la pr
   signout() {
     sessionStorage.removeItem('user');
     sessionStorage.removeItem('token');
+    // Essai d'aménagement pour pouvoir utiliser le guard :
+    //this.canActivate = false;
     this.router.navigateByUrl('signin');
   }
 

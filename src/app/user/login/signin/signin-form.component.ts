@@ -60,22 +60,26 @@ export class SigninFormComponent implements OnInit, OnDestroy {
     }
   }
 
-  // public doLogin(): void {
-  //   this.subscription = this.userService.login(this.signinForm.value)
-  //   .subscribe((authenticated: boolean) => {
-  //     if (authenticated) {
-  //       this.router.navigate(['/', 'home']);
-  //     } else {
-  //       this.signinForm.reset();
-  //     }
-  //   })
-  // }
+  // Login de l'authentification via le userService
+  public doLogin(): void {
+    this.subscription = this.userService.login(this.signinForm.value)
+    .subscribe((authenticated: boolean) => {
+      if (authenticated) {
+        this.router.navigate(['/', 'entrance']);
+      } else {
+        this.signinForm.reset();
+      }
+    })
+  }
 
-  doSignin() {
+  // Login de l'authentification via le authService
+  public doSignin() {
 		if(this.userName !== '' && this.userName !== null && this.userPass !== '' && this.userPass !== null) {
 
 			const request: RequestDto = { userName: this.userName, userPass: this.userPass};
 			this.authService.signin(request).subscribe((result)=> {
+        // Pour pouvoir utiliser le guard, this.userService.hasUser().getValue() doit être vrai dans HasUserGuard :
+        this.doLogin();
 				this.router.navigateByUrl('entrance');
 			}, () => {
 				this.error = 'Either invalid credentials or something went wrong';
