@@ -14,20 +14,21 @@
 
         <div>
             <mat-form-field appearance="fill">
-                <!-- <mat-label>Catégorie de POE</mat-label>
-                <mat-select>
-                    // <mat-option *ngFor="let poeType of poeTypes" [value]="poeType.valueOf">
-                    <mat-option *ngFor="let poeType of poeTypes">
+                <mat-label>Catégorie de POE *</mat-label>
+                <mat-select [(ngModel)]="selectedValue" [ngModelOptions]="{standalone: true}" name="selectType"
+                    [errorStateMatcher]="matcher">
+                    <mat-option *ngFor="let poeType of poeTypes" [value]="poeType">
                         {{poeType}}
                     </mat-option>
-                </mat-select> -->
-                <input matInput placeholder="Select (POEC/ POEI)" id="poeType" type="text"
-                    formControlName="poeType">
-                <mat-error *ngIf="c['poeType'].errors && c['poeType'].touched">
+                </mat-select>
+                <mat-error *ngIf="selected.hasError('required')">Le choix est obligatoire</mat-error>
+                <!-- <input matInput placeholder="Select (POEC/ POEI)" id="poeType" type="text"
+                    formControlName="poeType"> -->
+                <!-- <mat-error *ngIf="c['poeType'].errors && c['poeType'].touched">
                     <span *ngIf="c['poeType'].hasError('required')">
                         Le choix est obligatoire
                     </span>
-                </mat-error>
+                </mat-error> -->
             </mat-form-field>
         </div>
 

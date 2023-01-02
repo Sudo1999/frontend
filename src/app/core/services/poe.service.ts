@@ -5,6 +5,7 @@ import { filter, map, take } from 'rxjs/operators';
 import { Poe } from '../models/poe';
 import { PoeDto } from 'src/app/poes/dto/poe-dto';
 import { from, Observable } from 'rxjs';
+import { TypeofExpr } from '@angular/compiler';
 
 @Injectable({
   providedIn: 'root'
@@ -94,18 +95,23 @@ export class PoeService {
       { observe: 'response' });
   }
 
-  public getAllPoeTypes(): Observable<Set<Poe['poeType']>> {
-    return this.httpClient.get<any>(this.controllerBaseUrl)
+  public getAllPoeTypes(): string[] {
+    let typesTab: string[] = [];
+    let typesSet: Set<string> = new Set<string>();
+    this.httpClient.get<any>(this.controllerBaseUrl)
       .pipe(
         take(1),
-        map((poes: Set<any>) => {
-          return poes.add((inputPoe: any) => {
-            const poe: Poe = new Poe();
-            poe.setPoeType(inputPoe.poeType);
-            console.log(poe['poeType']);            
-            return poe['poeType'];
+        map((poes: any[]) => {
+          return poes.map((inputPoe: any) => {
+            typesSet.add(inputPoe.poeType);
           })
         })
       );
+      // for (let type of typesSet) {
+      //   typesTab.push(type);
+      // }
+      typesTab.push("POEC");
+      typesTab.push("POEI");
+      return typesTab;
   }
 }
