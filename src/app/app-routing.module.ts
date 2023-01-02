@@ -29,9 +29,9 @@ export class AppRoutingModule {
     {
       path: 'home',
       component: PoeWelcomeComponent,
-      // canActivate: [
-      //   HasUserGuard
-      // ]
+      canActivate: [
+        HasUserGuard
+      ]
     },
     {
       path: 'signup',
@@ -57,17 +57,17 @@ export class AppRoutingModule {
     {
       path: 'poe',
       component: PoeWelcomeComponent,
-      // canActivate: [
-      //   HasUserGuard
-      // ]
+      canActivate: [
+        HasUserGuard
+      ]
     },
     {
       path: 'poe/add',
       component: PoeFormComponent,
       resolve: { form: PoeResolver },  // canAcces était le premier type du Resolver
-      // canActivate: [
-      //   HasUserGuard
-      // ]
+      canActivate: [
+        HasUserGuard
+      ]
     },
     // {
     //   path: 'poe/:id',
@@ -80,39 +80,39 @@ export class AppRoutingModule {
       path: 'poe/update/:id',
       component: PoeFormComponent,
       resolve: { form: PoeResolver },  // canAcces était le premier type du Resolver
-      // canActivate: [
-      //   HasUserGuard
-      // ]
+      canActivate: [
+        HasUserGuard
+      ]
     },
     {
       path: 'stagiaire',
       component: StagiaireTableComponent,
-      // canActivate: [
-      //   HasUserGuard
-      // ]
+      canActivate: [
+        HasUserGuard
+      ]
     },
     {
       path: 'stagiaire/add',
       component: StagiaireFormComponent,
       resolve: { form: StagiaireResolver },
-      // canActivate: [
-      //   HasUserGuard
-      // ]
+      canActivate: [
+        HasUserGuard
+      ]
     },
     {
       path: 'stagiaire/:id',    // Paramètre de la route => le ":"
       component: StagiaireDetailComponent,
-      // canActivate: [
-      //   HasUserGuard
-      // ]
+      canActivate: [
+        HasUserGuard
+      ]
     },
     {
       path: 'stagiaire/update/:id',   // Paramètre de la route => le ":"
       component: StagiaireFormComponent,
       resolve: { form: StagiaireResolver },
-      // canActivate: [
-      //   HasUserGuard
-      // ]
+      canActivate: [
+        HasUserGuard
+      ]
     },
     {
       path: '**',   // Wild card : Impérativement la dernière route du routeur

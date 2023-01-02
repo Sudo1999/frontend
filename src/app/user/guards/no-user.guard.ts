@@ -17,7 +17,7 @@ export class NoUserGuard implements CanActivate {
   canActivate(
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
-    //const hasUser: boolean = this.userService.hasUser();
+      
     if (this.userService.hasUser().getValue()) {
       this.router.navigate(['/', 'home']);
       return false;   // La route ne doit pas être activée

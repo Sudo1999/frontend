@@ -18,9 +18,9 @@ export class HasUserGuard implements CanActivate {
   canActivate(
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
-      // Pour adapter le guard à l'authentification via le SigninFormComponent on pourrait modifier la fonction ici :
-      //if (this.authService.canActivate) {
-      if (this.userService.hasUser().getValue()) {
+      // Pour adapter le guard à l'authentification via le SigninFormComponent on modifie la fonction ici :
+      //if (this.userService.hasUser().getValue()) {
+      if(this.authService.isUserSignedin()) {
       return true;
     }
     // No user, go to login
