@@ -15,8 +15,8 @@ interface IDays {
 export class TodayService {
 
   public todayDate: Date = new Date();
-  public fetes: string = '';
-  public cestarrive: string = '';
+  // public fetes: string = '';
+  // public cestarrive: string = '';
   private dayTab: IDays[] = DbJson.today;
   private accesUrl!: string;
 
@@ -30,8 +30,17 @@ export class TodayService {
   //  private feedIt(): void {
   //  }
 
+  // Fonction générique inutilisée ici
   public getDayIndice(day: Date): number {
-    const monthday: string = `${day.getMonth()+1}${day.getDate()}`;
+    let monthNumber: string = `${day.getMonth()+1}`;
+    let dayNumber: string = `${day.getDate()}`;
+    if(day.getMonth()+1 < 10) {
+      monthNumber = `0${day.getMonth()+1}`;
+    }
+    if(day.getDate() < 10) {
+      dayNumber = `0${day.getDate()}`;
+    }
+    const monthday: string = monthNumber + dayNumber;
     function getMonthday(element: IDays) {
       return element.id === monthday;
     }
@@ -39,7 +48,16 @@ export class TodayService {
   }
 
   public getTodayIndice(): number {
-    const monthday: string = `${this.todayDate.getMonth()+1}${this.todayDate.getDate()}`;
+    let monthNumber: string = `${this.todayDate.getMonth()+1}`;
+    let dayNumber: string = `${this.todayDate.getDate()}`;
+    if(this.todayDate.getMonth()+1 < 10) {
+      monthNumber = `0${this.todayDate.getMonth()+1}`;
+    }
+    if(this.todayDate.getDate() < 10) {
+      dayNumber = `0${this.todayDate.getDate()}`;
+    }
+    const monthday: string = monthNumber + dayNumber;
+    //console.log("monthday = " + monthday);
     function getMonthday(element: IDays) {
       return element.id === monthday;
     }
@@ -48,16 +66,16 @@ export class TodayService {
 
   public getTodayFetes(): string {
     const indice = this.getTodayIndice();
-    return this.fetes = this.dayTab[indice].fetes;
+    return this.dayTab[indice].fetes;
   }
 
   public getTodayMrMme(): string {
     const indice = this.getTodayIndice();
-    return this.fetes = this.dayTab[indice].mrmme;
+    return this.dayTab[indice].mrmme;
   }
 
   public getTodayCestarrive(): string {
     const indice = this.getTodayIndice();
-    return this.fetes = this.dayTab[indice].cestarrive;
+    return this.dayTab[indice].cestarrive;
   }
 }

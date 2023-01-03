@@ -20,6 +20,7 @@ import { PoeFilterComponent } from './poes/components/poe-filter/poe-filter.comp
 import { SignupFormComponent } from './user/login/signup/signup-form.component';
 import { SigninFormComponent } from './user/login/signin/signin-form.component';
 import { HttpInterceptorService } from './user/services/http-interceptor.service';
+import { MatSelectModule } from '@angular/material/select';
 
 export function initializeApp(appInitService: AppInitializerService) {
   return (): Promise<any> => {
@@ -48,6 +49,7 @@ export function initializeApp(appInitService: AppInitializerService) {
     HttpClientModule,
     FormsModule,
     ReactiveFormsModule,
+    MatSelectModule,
     BrowserAnimationsModule,
     SharedModule,
     UserModule

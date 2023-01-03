@@ -1,7 +1,8 @@
 import { Inject, Injectable } from '@angular/core';
-import { AbstractControl, FormBuilder, FormControl, FormGroup } from '@angular/forms';
+import { AbstractControl, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { DateAdapter, MAT_DATE_LOCALE } from '@angular/material/core';
 import { Poe } from 'src/app/core/models/poe';
+import { DateValidator } from './date-validator';
 
 @Injectable({
   providedIn: 'root'
@@ -35,33 +36,37 @@ export class FormBuilderService {   // FormBuilderService du package poes
     this.form = this.formBuilder.group({
       title: [
         this.poe.getTitle(),
-        // [
-        //   Validators.required
-        // ]
+        [
+          Validators.required
+        ]
       ],
       poeType: [
         this.poe.getPoeType(),
-        // [
-        //   Validators.required
-        // ]
+        [
+          Validators.required
+        ]
       ],
       beginDate: [
-        this.poe.getBeginDate(),
-        // [
-        //   Validators.required
-        //   Validators ? => La date de début de la POE ne peut être supérieure à la date de fin.
-        // ]
+        this.poe.getBeginDate() !== null ? this.poe.getBeginDate() : '',
+        [
+          Validators.required,
+          //Validators ? => La date de début de la POE ne peut être supérieure à la date de fin.
+        ]
       ],
       endDate: [
-        this.poe.getEndDate(),
-        // [
-        //   Validators.required
-        //   Validators ? => La date de début de la POE ne peut être supérieure à la date de fin.
-        // ]
+        this.poe.getEndDate() !== null ? this.poe.getEndDate() : '',
+        [
+          Validators.required,
+          DateValidator.dateOrderValidator    // La validation fonctionne mais pas le message d'erreur
+          //Validators ? => La date de début de la POE ne peut être supérieure à la date de fin.
+        ]
       ],
       idAelion: [
         this.poe.getIdAelion()
       ]
+    },
+    {
+      validator: DateValidator.dateOrderValidator
     });
     
     if (this.updateMode) {

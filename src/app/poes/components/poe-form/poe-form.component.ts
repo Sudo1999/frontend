@@ -1,11 +1,20 @@
 import { Component, OnInit } from '@angular/core';
-import { AbstractControl, FormGroup } from '@angular/forms';
+import { AbstractControl, FormControl, FormGroup, FormGroupDirective, NgForm, Validators } from '@angular/forms';
 import { ActivatedRoute, Router, UrlSegment } from '@angular/router';
 import { Observable } from 'rxjs';
 import { Poe } from 'src/app/core/models/poe';
 import { PoeService } from 'src/app/core/services/poe.service';
 import { PoeDto } from '../../dto/poe-dto';
 import { FormBuilderService } from '../../formbuilder/form-builder.service';
+import {ErrorStateMatcher} from '@angular/material/core';
+
+/* Error when invalid control is dirty (modified), touched, or submitted. */
+export class MyErrorStateMatcher implements ErrorStateMatcher {
+  isErrorState(control: FormControl | null, form: FormGroupDirective | NgForm | null): boolean {
+    const isSubmitted = form && form.submitted;
+    return !!(control && control.invalid && (control.dirty || control.touched || isSubmitted));
+  }
+}
 
 @Component({
   selector: 'app-poe-form',
@@ -15,7 +24,15 @@ import { FormBuilderService } from '../../formbuilder/form-builder.service';
 export class PoeFormComponent implements OnInit {
 
   public poeForm!: FormGroup;
+  public poeTypes: string[] = [];
+  public selectedValue: string = '';
   public addMode: boolean = true;
+
+  /* Select with a custom ErrorStateMatcher */
+  selected = new FormControl('valid', [Validators.required, Validators.pattern('valid')]);
+  selectFormControl = new FormControl('valid', [Validators.required, Validators.pattern('valid')]);
+  nativeSelectFormControl = new FormControl('valid', [Validators.required, Validators.pattern('valid')]);
+  matcher = new MyErrorStateMatcher();
 
   constructor(
     private router: Router,
@@ -27,7 +44,6 @@ export class PoeFormComponent implements OnInit {
   ngOnInit(): void {
     const data: any = this.route.snapshot.data;
     this.poeForm = data.form;
-    console.log(`${data}`);
     console.log(`${this.poeForm instanceof FormGroup ? 'poeForm OK' : 'poeForm KO'}`);
 
     this.route.url    // Observable
@@ -49,9 +65,15 @@ export class PoeFormComponent implements OnInit {
           console.log('Mode add');
         }
       });
+
+      //this.poeTypes.push("Catégorie de POE");
+      for(var type of this.poeService.getAllPoeTypes()) {
+        this.poeTypes.push(type);
+      }
   }
 
-  public get control(): { [key: string]: AbstractControl } {
+  // Usage => c['title'] instead of poeForm.controls['title'] in the form
+  public get c(): { [key: string]: AbstractControl } {
     return this.poeForm.controls;
   }
 
@@ -64,7 +86,6 @@ export class PoeFormComponent implements OnInit {
     if (this.addMode) {
       subscription = this.poeService.add(poeDto);
     } else {
-      // Invoke service update method
       subscription = this.poeService.update(this.poeForm.value)
     }
     subscription.subscribe(() => this.goList());

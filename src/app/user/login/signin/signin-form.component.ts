@@ -60,21 +60,23 @@ export class SigninFormComponent implements OnInit, OnDestroy {
     }
   }
 
+  // Login de l'authentification via le userService
   // public doLogin(): void {
   //   this.subscription = this.userService.login(this.signinForm.value)
   //   .subscribe((authenticated: boolean) => {
   //     if (authenticated) {
-  //       this.router.navigate(['/', 'home']);
+  //       this.router.navigate(['/', 'entrance']);
   //     } else {
   //       this.signinForm.reset();
   //     }
   //   })
   // }
 
-  doSignin() {
+  // Login de l'authentification via le authService
+  public doSignin() {
 		if(this.userName !== '' && this.userName !== null && this.userPass !== '' && this.userPass !== null) {
-
 			const request: RequestDto = { userName: this.userName, userPass: this.userPass};
+      
 			this.authService.signin(request).subscribe((result)=> {
 				this.router.navigateByUrl('entrance');
 			}, () => {

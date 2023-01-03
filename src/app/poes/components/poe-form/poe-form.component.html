@@ -3,47 +3,62 @@
 <ng-container *ngIf="poeForm">
     <form [formGroup]="poeForm" (ngSubmit)="onSubmit()">
 
-        <!-- Modèle standard utilisable pour tous les champs :
-        <div>
-            <mat-form-field>
-                <input matInput placeholder="" id="" type="" formControlName="">
-                <mat-error *ngIf="control[''].errors && control[''].touched">
-                    Message d'erreur
-                </mat-error>
-            </mat-form-field>
-        </div> -->
-
         <div>
             <mat-form-field>
                 <input matInput placeholder="Intitulé de la POE" id="title" type="text" formControlName="title">
-                <mat-error *ngIf="control['title'].errors && control['title'].touched">
-                    L'intitulé est obligatoire !
+                <mat-error *ngIf="c['title'].errors && c['title'].touched">
+                    L'intitulé est obligatoire
                 </mat-error>
             </mat-form-field>
         </div>
 
         <div>
-            <mat-form-field>
-                <input matInput placeholder="Menu déroulant (POEC/ POEI)" id="poeType" type="text" formControlName="poeType">
-                <mat-error *ngIf="control['poeType'].errors && control['poeType'].touched">
-                    Le choix du type de POE est obligatoire !
-                </mat-error>
+            <mat-form-field appearance="fill">
+                <mat-label>Catégorie de POE *</mat-label>
+                <mat-select [(ngModel)]="selectedValue" [ngModelOptions]="{standalone: true}" name="selectType"
+                    [errorStateMatcher]="matcher">
+                    <mat-option *ngFor="let poeType of poeTypes" [value]="poeType">
+                        {{poeType}}
+                    </mat-option>
+                </mat-select>
+                <mat-error *ngIf="selected.hasError('required')">Le choix est obligatoire</mat-error>
+                <!-- <input matInput placeholder="Select (POEC/ POEI)" id="poeType" type="text"
+                    formControlName="poeType"> -->
+                <!-- <mat-error *ngIf="c['poeType'].errors && c['poeType'].touched">
+                    <span *ngIf="c['poeType'].hasError('required')">
+                        Le choix est obligatoire
+                    </span>
+                </mat-error> -->
             </mat-form-field>
         </div>
 
         <div>
             <mat-form-field>
-                <input matInput id="beginDate" type="Date" formControlName="beginDate">
-                <mat-error *ngIf="control['beginDate'].errors && control['beginDate'].touched">
-                    La date de début est obligatoire !
+                <mat-label>Date de début</mat-label>
+                <input matInput [matDatepicker]="dpbegin" id="beginDate" formControlName="beginDate">
+                <mat-hint>JJ-MM-YYYY</mat-hint>
+                <mat-datepicker-toggle matIconSuffix [for]="dpbegin"></mat-datepicker-toggle>
+                <mat-datepicker #dpbegin></mat-datepicker>
+                <mat-error *ngIf="c['beginDate'].errors && c['beginDate'].touched">
+                    La date de début est obligatoire
                 </mat-error>
             </mat-form-field>
             <mat-form-field>
-                <input matInput id="endDate" type="Date" formControlName="endDate">
-                <mat-error *ngIf="control['endDate'].errors && control['endDate'].touched">
-                    La date de fin est obligatoire !
+                <mat-label>Date de fin</mat-label>
+                <input matInput [matDatepicker]="dpend" id="endDate" formControlName="endDate">
+                <mat-hint>JJ-MM-YYYY</mat-hint>
+                <mat-datepicker-toggle matIconSuffix [for]="dpend"></mat-datepicker-toggle>
+                <mat-datepicker #dpend></mat-datepicker>
+                <mat-error *ngIf="c['endDate'].errors && c['endDate'].touched">
+                    <span *ngIf="c['endDate'].hasError('required')">
+                        La date de fin est obligatoire
+                    </span>
                 </mat-error>
             </mat-form-field>
+            <mat-error id="errorMsg" *ngIf="c['beginDate'].touched && c['endDate'].touched 
+                && c['beginDate'].value !== null && c['endDate'].value !== null && c['beginDate'].value > c['endDate'].value">
+                {{"La date de fin doit être postérieure à la date de début"}}
+            </mat-error>
         </div>
 
         <div>
@@ -54,7 +69,7 @@
 
         <p></p>
         <div>
-            <button mat-raised-button color="primary" [disabled]="!poeForm.valid">
+            <button id="formBtn" mat-raised-button color="primary" [disabled]="!poeForm.valid">
                 {{addMode ? 'Ajouter' : 'Modifier'}}
             </button>
             <button mat-raised-button color="danger" type="button" (click)="goList()">Liste</button>

@@ -63,7 +63,7 @@ export class UserService {    // Ce service est remplacé par le AuthService dan
 
   public logout(): void {
     this._user = null;
-    this.router.navigate(['/', 'login']);
+    this.router.navigate(['/', 'signin']);
     this.hasUser$.next(false);
   }
 

@@ -27,13 +27,6 @@ export class FormBuilderService {   // FormBuilderService du package stagiaires
   }
 
   public build(stagiaire: Stagiaire): FormBuilderService {
-    // public build(...args: Stagiaire[]): FormBuilderService {
-    // ...args => Zéro paramètre ou n paramètres stockés dans un tableau (ce n'est plus utile)
-    // Si on le fait il faut modifier private stagiaire: Stagiaire = new Stagiaire();
-    //   if (args.length)
-    //     this.stagiaire = Object.assign(this.stagiaire, args[0]);
-    //   else
-    //     this.stagiaire = new Stagiaire();
     this.stagiaire = stagiaire;
     if (this.stagiaire.getId() != 0) {
       this.updateMode = true;
@@ -61,20 +54,23 @@ export class FormBuilderService {   // FormBuilderService du package stagiaires
       phoneNumber: [
         this.stagiaire.getPhoneNumber(),
         [
-          Validators.pattern("^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$")
+          Validators.required,
+          Validators.pattern("^(0|\\+33)[1-9][0-9]{8}$")
         ]
       ],
       birthDate: [
-        this.stagiaire.getBirthDate() !== null ? this.stagiaire.getBirthDate() : ''
+        this.stagiaire.getBirthDate() !== null ? this.stagiaire.getBirthDate() : '',
+        [
+          Validators.required
+        ]
       ]
     });
 
     // Ajoute un contrôle avec la valeur id du Stagiaire
-    // donc form.value vaudra {id: 1, ...}
     if (this.updateMode) {
       const idControl: AbstractControl = new FormControl(this.stagiaire.getId());
       this.form.addControl('id', idControl);
     }
     return this; // To chain methods
-  }  
+  }
 }
