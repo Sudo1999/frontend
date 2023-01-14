@@ -111,19 +111,19 @@ export class StagiaireService {
       );
   }
 
-  public add(stagiaireInput: StagiaireDto): Observable<Stagiaire> {
-    console.log("Le add a appelé ", stagiaireInput);
-    return this.httpClient.post<StagiaireDto>(this.controllerBaseUrl, stagiaireInput)
+  public add(stagiaireDto: StagiaireDto): Observable<Stagiaire> {
+    console.log("Le add a appelé ", stagiaireDto);
+    return this.httpClient.post<StagiaireDto>(this.controllerBaseUrl, stagiaireDto)
       .pipe(
         take(1),
-        map((stagiaireDto: StagiaireDto) => {
+        map((inputDto: StagiaireDto) => {
           const stagiaire: Stagiaire = new Stagiaire();
-          stagiaire.setId(stagiaireDto.id!);
-          stagiaire.setLastName(stagiaireDto.lastName);
-          stagiaire.setFirstName(stagiaireDto.firstName);
-          stagiaire.setEmail(stagiaireDto.email);
-          stagiaire.setPhoneNumber(stagiaireDto.phoneNumber);
-          stagiaire.setBirthDate(new Date(stagiaireDto.birthDate))
+          stagiaire.setId(inputDto.id!);
+          stagiaire.setLastName(inputDto.lastName);
+          stagiaire.setFirstName(inputDto.firstName);
+          stagiaire.setEmail(inputDto.email);
+          stagiaire.setPhoneNumber(inputDto.phoneNumber);
+          stagiaire.setBirthDate(new Date(inputDto.birthDate))
           return stagiaire;
         })
       );
@@ -136,14 +136,14 @@ export class StagiaireService {
     return this.httpClient.put<Stagiaire>(`${this.controllerBaseUrl}`, stagiaire)
     .pipe(
       take(1),
-      map((anyStagiaire: any) => {
+      map((inputStagiaire: any) => {
         const stagiaire: Stagiaire = new Stagiaire();
-        stagiaire.setId(anyStagiaire.id!);
-        stagiaire.setLastName(anyStagiaire.lastName);
-        stagiaire.setFirstName(anyStagiaire.firstName);
-        stagiaire.setBirthDate(new Date(anyStagiaire.birthdate));
-        stagiaire.setPhoneNumber(anyStagiaire.phoneNumber);
-        stagiaire.setEmail(anyStagiaire.email);
+        stagiaire.setId(inputStagiaire.id!);
+        stagiaire.setLastName(inputStagiaire.lastName);
+        stagiaire.setFirstName(inputStagiaire.firstName);
+        stagiaire.setBirthDate(new Date(inputStagiaire.birthdate));
+        stagiaire.setPhoneNumber(inputStagiaire.phoneNumber);
+        stagiaire.setEmail(inputStagiaire.email);
         return stagiaire;
       })
     )
