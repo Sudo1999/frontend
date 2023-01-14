@@ -17,10 +17,13 @@ import { AppInitializerService } from './core/services/app-initializer.service';
 import { PoeWelcomeComponent } from './poes/components/poe-welcome/poe-welcome.component';
 import { PoeFormComponent } from './poes/components/poe-form/poe-form.component';
 import { PoeFilterComponent } from './poes/components/poe-filter/poe-filter.component';
+import { PoeDetailComponent } from './poes/components/poe-detail/poe-detail.component';
+import { PoeAddStagiaireComponent } from './poes/components/poe-add-stagiaire/poe-add-stagiaire.component';
 import { SignupFormComponent } from './user/login/signup/signup-form.component';
 import { SigninFormComponent } from './user/login/signin/signin-form.component';
 import { HttpInterceptorService } from './user/services/http-interceptor.service';
 import { MatSelectModule } from '@angular/material/select';
+import { MatTabsModule } from '@angular/material/tabs';
 
 export function initializeApp(appInitService: AppInitializerService) {
   return (): Promise<any> => {
@@ -33,13 +36,15 @@ export function initializeApp(appInitService: AppInitializerService) {
     AppComponent,
     StagiaireTableComponent,
     StagiaireFilterComponent,
-    StagiaireDetailComponent,
     StagiaireFormComponent,
+    StagiaireDetailComponent,
     InitialsPipe,
     BubbleDirective,
     PoeWelcomeComponent,
     PoeFormComponent,
     PoeFilterComponent,
+    PoeDetailComponent,
+    PoeAddStagiaireComponent,
     //SignupFormComponent,  // L'ajout de ces deux modules provoque une erreur sur UserModule :
     //SigninFormComponent   // => The Component 'Sign..FormComponent' is declared by more than one NgModule.
   ],
@@ -50,6 +55,7 @@ export function initializeApp(appInitService: AppInitializerService) {
     FormsModule,
     ReactiveFormsModule,
     MatSelectModule,
+    MatTabsModule,
     BrowserAnimationsModule,
     SharedModule,
     UserModule

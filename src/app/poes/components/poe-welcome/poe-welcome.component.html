@@ -17,7 +17,9 @@
         <ng-container *ngFor="let poe of poes">
             <tr *ngIf="selectPoe(poe)">
                 <td>
+                    <a id="poelink" [routerLink]="['/', 'poe', 'detail', poe.getId()]">
                     {{poe.getTitle()}}
+                    </a>
                 </td>
                 <td>
                     {{poe.getBeginDate().toLocaleDateString()}}

@@ -1,0 +1,44 @@
+<!-- <p>poe-detail works!</p> -->
+
+<div class="stagiaireCard" *ngIf="poe">
+
+    <div class="infosPoe">
+        <p>Nom de la POE : {{poe.getTitle()}}</p>
+        <p>Type : {{poe.getPoeType()}}</p>
+        <p>Date de début : {{poe.getBeginDate().toLocaleDateString()}}</p>
+        <p>Date de fin : {{poe.getEndDate().toLocaleDateString()}}</p>
+        <p>Nombre de stagiaires dans la Poe : {{stagiaires.length}}</p>
+    </div>
+
+    <table class="listeStagiaires">
+        <thead>
+            <tr>
+                <th>Prénom</th>
+                <th>Nom de famille</th>
+                <th>Date de naissance</th>
+                <th>Email</th>
+                <th>Numéro de téléphone</th>
+                <th>&nbsp;</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            <ng-container *ngFor="let stagiaire of stagiaires">
+                <tr>
+                    <td>{{stagiaire.getLastName() | uppercase}}</td>
+                    <td>{{stagiaire.getFirstName()}}</td>
+                    <td>{{stagiaire.getBirthDate() | date: 'dd-MM-YYYY'}}</td>
+                    <td>{{stagiaire.getEmail()}}</td>
+                    <td>{{stagiaire.getPhoneNumber()}}</td>
+                    <td>
+                        <button class="buttonDelete" (click)="deleteStagiaireFromPoe(poe, stagiaire)">x</button>
+                    </td>
+                </tr>
+            </ng-container>
+        </tbody>
+    </table>
+
+    <a mat-raised-button color="primary" [routerLink]="['/', 'poe', 'addStagiaires', poe.getId()]">
+        Ajouter des stagiaires dans cette Poe
+    </a>
+</div>
