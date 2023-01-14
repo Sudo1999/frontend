@@ -1,0 +1,31 @@
+<!-- <p>poe-add-stagiaire works!</p> -->
+
+<mat-card>
+    <mat-card-header>
+        <mat-card-title>
+            {{poe.getPoeType()}} : {{poe.getTitle()}}
+        </mat-card-title>
+        <mat-card-subtitle>
+            du {{poe.getBeginDate()}} au {{poe.getEndDate()}}
+        </mat-card-subtitle>
+    </mat-card-header>
+
+    <mat-card-content>
+        <p>Cette POE possède :{{poe.getStagiaires().length}} stagiaires</p>
+
+        <button mat-raised-button color="warn" class="btn add-btn" [disabled]="stagiairesIdsToAdd.length === 0"
+            (click)="onAddManyStagiaires()">
+            Add {{stagiairesIdsToAdd.length}} Stagiaires
+        </button>
+
+        <mat-selection-list #stagiairesSelected (selectionChange)="onListSelectionChange($event)">
+            <mat-list-option *ngFor="let stagiaire of stagiaires" [value]="stagiaire.getId()">
+                {{ stagiaire.getFirstName() }} {{ stagiaire.getLastName() }}
+            </mat-list-option>
+        </mat-selection-list>
+    </mat-card-content>
+
+    <button mat-mini-fab color="primary" (click)="onBackButton()">
+        <mat-icon>keyboard_arrow_left</mat-icon>
+    </button>
+</mat-card>

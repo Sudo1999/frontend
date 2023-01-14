@@ -1,11 +1,13 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { PoeFormComponent } from './poes/components/poe-form/poe-form.component';
 import { PoeWelcomeComponent } from './poes/components/poe-welcome/poe-welcome.component';
+import { PoeFormComponent } from './poes/components/poe-form/poe-form.component';
+import { PoeDetailComponent } from './poes/components/poe-detail/poe-detail.component';
+import { PoeAddStagiaireComponent } from './poes/components/poe-add-stagiaire/poe-add-stagiaire.component';
 import { PoeResolver } from './poes/resolvers/poe.resolver';
-import { StagiaireDetailComponent } from './stagiaires/components/stagiaire-detail/stagiaire-detail.component';
-import { StagiaireFormComponent } from './stagiaires/components/stagiaire-form/stagiaire-form.component';
 import { StagiaireTableComponent } from './stagiaires/components/stagiaire-table/stagiaire-table.component';
+import { StagiaireFormComponent } from './stagiaires/components/stagiaire-form/stagiaire-form.component';
+import { StagiaireDetailComponent } from './stagiaires/components/stagiaire-detail/stagiaire-detail.component';
 import { StagiaireResolver } from './stagiaires/resolvers/stagiaire.resolver';
 import { HasUserGuard } from './user/guards/has-user.guard';
 import { NoUserGuard } from './user/guards/no-user.guard';
@@ -28,10 +30,7 @@ export class AppRoutingModule {
     },
     {
       path: 'home',
-      component: PoeWelcomeComponent,
-      canActivate: [
-        HasUserGuard
-      ]
+      redirectTo: 'poe',
     },
     {
       path: 'signup',
@@ -69,17 +68,24 @@ export class AppRoutingModule {
         HasUserGuard
       ]
     },
-    // {
-    //   path: 'poe/:id',
-    //   component: PoeDetailComponent,
-    //   canActivate: [
-    //     HasUserGuard
-    //   ]
-    // },
     {
       path: 'poe/update/:id',
       component: PoeFormComponent,
       resolve: { form: PoeResolver },  // canAcces était le premier type du Resolver
+      canActivate: [
+        HasUserGuard
+      ]
+    },
+    {
+      path: 'poe/:id',
+      component: PoeDetailComponent,
+      canActivate: [
+        HasUserGuard
+      ]
+    },
+    {
+      path: 'poe/addStagiaires/:id',
+      component: PoeAddStagiaireComponent,
       canActivate: [
         HasUserGuard
       ]
@@ -100,16 +106,16 @@ export class AppRoutingModule {
       ]
     },
     {
-      path: 'stagiaire/:id',    // Paramètre de la route => le ":"
-      component: StagiaireDetailComponent,
+      path: 'stagiaire/update/:id',   // Paramètre de la route => le ":"
+      component: StagiaireFormComponent,
+      resolve: { form: StagiaireResolver },
       canActivate: [
         HasUserGuard
       ]
     },
     {
-      path: 'stagiaire/update/:id',   // Paramètre de la route => le ":"
-      component: StagiaireFormComponent,
-      resolve: { form: StagiaireResolver },
+      path: 'stagiaire/:id',    // Paramètre de la route => le ":"
+      component: StagiaireDetailComponent,
       canActivate: [
         HasUserGuard
       ]

@@ -1,3 +1,5 @@
+import { Stagiaire } from "./stagiaire";
+
 export class Poe {
 
     private id: number = 0;
@@ -6,6 +8,7 @@ export class Poe {
     private endDate!: Date;
     private poeType: string = "";
     private idAelion: string = "";
+    private stagiaires: Array<Stagiaire> = [];
 
     /*
 1. "En tant qu'utilisateur, je souhaite visualiser la liste des POE afin de pouvoir accéder aux options
@@ -61,5 +64,12 @@ export class Poe {
     }
     public setIdAelion(idAelion: string): void {
         this.idAelion = idAelion;
-    }    
+    }
+
+    public getStagiaires(): Array<Stagiaire> {
+        return this.stagiaires;
+    }
+    public setStagiaires(stagiaires: Array<Stagiaire>): void {
+        this.stagiaires = stagiaires;
+    }
 }

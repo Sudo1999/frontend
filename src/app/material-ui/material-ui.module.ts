@@ -12,6 +12,10 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatMenuModule } from '@angular/material/menu';
+// Page poe-add-stagiaire :
+import { MatCardModule } from '@angular/material/card';
+import { MatSelectModule } from '@angular/material/select';
+import { MatListModule } from '@angular/material/list';
 
 @NgModule({
   declarations: [],
@@ -34,6 +38,10 @@ export class MaterialUiModule {
     MatSnackBarModule,
     MatSlideToggleModule,
     MatToolbarModule,
-    MatMenuModule
+    MatMenuModule,
+     // Page poe-add-stagiaire :
+     MatCardModule,
+     MatSelectModule,
+     MatListModule
   ]
 }
